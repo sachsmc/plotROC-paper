@@ -1,0 +1,4 @@
+A Critical examination of the ROC curve plot
+---------------
+
+Plots of the receiver operating characteristic (ROC) curve are ubiquitous in medical research. Designed to simultaneously display the operating characteristics at every possible value of a continuous diagnostic test, ROC curves are used in oncology to evaluate screening, diagnostic, prognostic and predictive biomarkers. We evaluate current trends in the design of ROC curve plots with a literature review. Our review suggests that ROC curve plots are often ineffective as statistical charts and that poor design obscures the relevant information the chart is intended to display. We describe our new R package that was created to address the shortcomings of existing tools. The package has functions to create informative ROC curve plots, with sensible defaults, for use in print or as an interactive web-based plot. A web application was developed to reach a broader audience of non-R users.
