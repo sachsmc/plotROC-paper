@@ -452,3 +452,27 @@ http://github.com/sachsmc/plotROC
 
 - Yingdong Zhao
 
+# Outtakes
+
+---
+
+![com3](figures/onepoint.png)
+
+
+
+---
+
+![com1](figures/comedy1.png)
+
+---
+
+![com2](figures/comedy2.png)
+
+
+
+
+
+
+
+
+
