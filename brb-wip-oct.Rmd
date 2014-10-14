@@ -300,11 +300,11 @@ bltab(rev$labels, "Curve labels")
 
 ![spag](figures/spaghetti2.png)
 
-## Tables in diguise
+## Tables in disguise
 
 ![table](figures/table.png)
 
-## Almost useful
+## Almost Useful
 
 ![good](figures/good1.jpg)
 
@@ -318,7 +318,7 @@ bltab(rev$labels, "Curve labels")
 
   - Value of a biomarker
     + AUC/Partial AUC?
-    + Most north-western point = Total Gain, maximum Youden Index
+    + Most north-western point, maximum Youden Index
 
 ### ROC plots encode this information poorly
 
@@ -360,19 +360,22 @@ Enable the observer to
 
 ## Currently available
 
+<div class="columns-2">
 #### Several R packages
 
   - [`ROCR`](http://rocr.bioinf.mpi-sb.mpg.de/) (Encodes cutoff values as color scale along curve)
   - [`pROC`](http://web.expasy.org/pROC/) (Basically standard R plot with CIs)
   - Others for specific estimation methods
   - Roll your own
+
+![rocr](figures/rocr.png)
   
 #### Others
 
   - Excel!
   - SPSS
   - SAS?
-  
+</div>
 Apparently these don't have sensible defaults
 
 ## My solution
