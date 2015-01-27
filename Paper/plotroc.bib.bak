@@ -1,0 +1,150 @@
+% This file was created with JabRef 2.10.
+% Encoding: MacRoman
+
+
+@Article{bostock2011d3,
+  Title                    = {D$^3$ data-driven documents},
+  Author                   = {Bostock, Michael and Ogievetsky, Vadim and Heer, Jeffrey},
+  Journal                  = {Visualization and Computer Graphics, IEEE Transactions on},
+  Year                     = {2011},
+  Number                   = {12},
+  Pages                    = {2301--2309},
+  Volume                   = {17},
+
+  Publisher                = {IEEE}
+}
+
+@Book{cleveland1993,
+  Title                    = {Visualizing Data},
+  Author                   = {Cleveland, William S.},
+  Publisher                = {Hobart Press},
+  Year                     = {1993},
+
+  ISBN                     = {0963488406}
+}
+
+@Article{clopper1934use,
+  Title                    = {The use of confidence or fiducial limits illustrated in the case of the binomial},
+  Author                   = {Clopper, CJ and Pearson, Egon S},
+  Journal                  = {Biometrika},
+  Year                     = {1934},
+  Number                   = {4},
+  Pages                    = {404--413},
+  Volume                   = {26},
+
+  Publisher                = {JSTOR}
+}
+
+@Manual{animint,
+  Title                    = {\pkg{animint}: a Grammar for Interactive Animations},
+  Author                   = {Toby D Hocking and Carson Sievert and Susan VanderPlas},
+  Note                     = {\proglang{R}~package version~2014.12.4},
+  Year                     = {2014},
+
+  Bdsk-url-1               = {https://github.com/tdhock/animint},
+  Url                      = {https://github.com/tdhock/animint}
+}
+
+@Manual{gridsvg,
+  Title                    = {gridSVG: Export grid Graphics as SVG},
+  Author                   = {Paul Murrell and Simon Potter},
+  Note                     = {R package version 1.4-2},
+  Year                     = {2014},
+
+  Bdsk-url-1               = {http://CRAN.R-project.org/package=gridSVG},
+  Url                      = {http://CRAN.R-project.org/package=gridSVG}
+}
+
+@Book{pepe2003statistical,
+  Title                    = {The statistical evaluation of medical tests for classification and prediction},
+  Author                   = {Pepe, Margaret Sullivan},
+  Publisher                = {Oxford University Press},
+  Year                     = {2003},
+
+  Date-added               = {2014-10-27 17:28:41 +0000},
+  Date-modified            = {2014-10-27 17:53:38 +0000}
+}
+
+@Manual{rcharts,
+  Title                    = {Interactive Charts using \proglang{Javascript} Visualization Libraries},
+  Author                   = {Thomas Reinholdsson and Kenton Russell and Ramnath Vaidyanathan},
+  Note                     = {\proglang{R}~package version~0.4.5},
+  Year                     = {2014},
+
+  Bdsk-url-1               = {http://ramnathv.github.io/rCharts/},
+  Url                      = {http://ramnathv.github.io/rCharts/}
+}
+
+@Article{pROC,
+  Title                    = {pROC: an open-source package for R and S+ to analyze and compare ROC curves},
+  Author                   = {Xavier Robin and Natacha Turck and Alexandre Hainard and Natalia Tiberti and Fr{\'e}d{\'e}rique Lisacek and Jean-Charles Sanchez and Markus M{\"u}ller},
+  Journal                  = {BMC Bioinformatics},
+  Year                     = {2011},
+  Pages                    = {77},
+  Volume                   = {12}
+}
+
+@Manual{ggvis,
+  Title                    = {ggvis: Interactive grammar of graphics},
+  Author                   = {{RStudio} and {Inc.}},
+  Note                     = {R package version 0.4},
+  Year                     = {2014},
+
+  Bdsk-url-1               = {http://CRAN.R-project.org/package=ggvis},
+  Url                      = {http://CRAN.R-project.org/package=ggvis}
+}
+
+@Manual{shiny,
+  Title                    = {shiny: Web Application Framework for R},
+  Author                   = {{RStudio} and {Inc.}},
+  Note                     = {R package version 0.10.2.2},
+  Year                     = {2014},
+
+  Url                      = {http://CRAN.R-project.org/package=shiny}
+}
+
+@Article{rocr,
+  Title                    = {ROCR: visualizing classifier performance in R},
+  Author                   = {T. Sing and O. Sander and N. Beerenwinkel and T. Lengauer},
+  Journal                  = {Bioinformatics},
+  Year                     = {2005},
+  Number                   = {20},
+  Pages                    = {7881},
+  Volume                   = {21},
+
+  Bdsk-url-1               = {http://rocr.bioinf.mpi-sb.mpg.de},
+  Entry                    = {article},
+  Url                      = {http://rocr.bioinf.mpi-sb.mpg.de}
+}
+
+@Manual{htmlwidgets,
+  Title                    = {htmlwidgets: HTML Widgets for R},
+  Author                   = {Ramnath Vaidyanathan and Joe Cheng and JJ Allaire and Yihui Xie and and Kenton Russell},
+  Note                     = {R package version 0.3.2},
+  Year                     = {2014},
+
+  Bdsk-url-1               = {http://CRAN.R-project.org/package=htmlwidgets},
+  Url                      = {http://CRAN.R-project.org/package=htmlwidgets}
+}
+
+@Book{wickham2009ggplot2,
+  Title                    = {ggplot2: elegant graphics for data analysis},
+  Author                   = {Hadley Wickham},
+  Publisher                = {Springer New York},
+  Year                     = {2009},
+
+  Bdsk-url-1               = {http://had.co.nz/ggplot2/book},
+  ISBN                     = {978-0-387-98140-6},
+  Url                      = {http://had.co.nz/ggplot2/book}
+}
+
+@Manual{knitr,
+  Title                    = {knitr: A General-Purpose Package for Dynamic Report Generation in R.},
+  Author                   = {Yihui Xie},
+  Note                     = {R package version 1.8},
+  Year                     = {2014},
+
+  Owner                    = {sachsmc},
+  Timestamp                = {2015.01.26}
+}
+
