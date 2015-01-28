@@ -142,12 +142,18 @@ str(rocdata)
  $ FPF: num  0.981 0.962 0.943 0.925 0.906 ...
 ```
 
-The same data.frame `rocdata` can be used to generate an interactive plot to view in Rstudio viewer or web browser.
+The same data.frame `rocdata` can be used to generate an interactive plot to view in Rstudio viewer or web browser. A screen shot of an interactive plot is shown in figure \ref{interact}. Hovering over the display shows the cutoff value at the point nearest to the cursor. Clicking makes the cutoff label stick until the next click, and if confidence regions are available, clicks will also display those as grey rectangles. 
 
 
 ```r
 plot_interactive_roc(rocdata)
 ```
+
+\begin{figure}[ht]
+\centering
+\includegraphics{screen-shot.pdf}
+\caption{Screen shot of an interactive plot created with \pkg{plotROC} being displayed in the Rstudio viewer. Hovering the mouse cursor over the plot causes the cutoff label nearest to the cursor to be displayed. Clicking will display a confidence region, if available, and make the label stick until the next click. For live examples, see the package vignette, or go to http://sachsmc.github.io/plotROC. \label{interact}}
+\end{figure}
 
 The `rocdata` is passed to the `ggroc` function with an optional label. This creates a ggplot object of the ROC curve using the \pkg{ggplot2} package [@ggplot2]. 
 
@@ -284,9 +290,30 @@ plot_journal_roc(binorm_plot, binorm_rocdata)
 
 ![Illustration of smooth binormal ROC curve. \label{binorm}](figure/binormal-1.pdf) 
 
+Another potential use of this approach is for plotting time-dependent ROC curves for time-to-event outcomes estimated as desribed in [@heagerty2000time].
+
 # How it Works
 
+\pkg{plotROC} makes use of \pkg{ggplot2} [@ggplot2], \pkg{gridSVG} [@gridsvg], and \pkg{d3.js} [@bostock2011d3] to create interactive plots. The first step in the process is to create `ggplot` objects using the `ggroc` or `multi_ggroc` functions. These functions return standard `ggplot` objects that include basic styling, hidden cutoff labels, and hidden confidence regions. They can be plotted and inspected in the \proglang{R} console. These form the basis for both the print versions and the interactive versions of the plots. Creating a print version by using the `plot_journal_roc` function simply makes visible a subset of the hidden cutoff labels and confidence regions, if available. 
+
+\pkg{plotROC} makes interactive plots by first converting the `ggplot` object into a scalable vector graphic (svg) object with the `grid.export` function. This function maps each element of the plot to a corresponding element of the svg markup language. We keep track of the names of the points and labels elements so that we can add interactivity using \pkg{d3.js} and \proglang{JavaScript}. The main interactive feature we wanted was to be able to display the cutoff labels at the points on the ROC curve closest to the mouse cursor. 
+
+There are many ways to solve this with \pkg{d3.js}, but we decided to use Voronoi polygons to map the cursor location to the nearest point on the ROC curve. The idea is that for the set of cutoff points along the ROC curve, the `d3.geom.voronoi` function chain computes a set of polygons overlaying the plotting region such that the area of each polygon contains the region of the plot closest to it's corresponding cutoff point. Hover events are bound to the polygons so that when the mouse cursor moves around the plotting region, the closest point on the ROC curve is made visible. Similarly, click events are bound to the polygons so that the appropriate confidence region is made visible upon clicking. The svg code and all necessary \proglang{JavaScript} code is returned in the character string provided by `export_interactive_roc`. Figure \ref{flow} outlines the \pkg{plotROC} process. 
+
+
+
+\begin{figure}[ht]
+\centering
+\includegraphics{diagram.pdf}
+\caption{Flowchart illustrating the approach that \pkg{plotROC} takes to generate either static plots for print or interactive plots for web-use. \label{flow}}
+\end{figure}
+
+This approach is similar to what is done in the \pkg{gridSVG} `grid.animate` function, which uses the svg `<animate />` tags. However, the available features were not sufficient for our needs, which is why we used \pkg{d3.js}. There are several other \proglang{R} packages that aim to create interactive figures. The authors of \pkg{animint} [@animint] created an extensive \proglang{JavaScript} library that creates plots in a similar way as \pkg{ggplot2}. A set of interactive features can be added to plots using \pkg{d3.js}. \pkg{ggvis} [@ggvis], \pkg{rCharts} [@rcharts], and the more recently released \pkg{htmlwidgets} [@htmlwidgets] all leverage existing charting libraries written in \proglang{JavaScript}. Their general approach is to manipulate the data and create options in \proglang{R}, and then let the charting libraries handle the rendering and interactivity. \pkg{plotROC} lets \proglang{R} do the rendering, allowing the figures to be consistent across print and web-based media, and retaining the distinctive \proglang{R} style. 
+
+
 # Discussion
+
+Here we have illustrated the usage and described the mechanics of a new \proglang{R} package for creating ROC curve plots. The functions are easy to use, even for non-\proglang{R} users _via_ the web application, yet have sufficient flexibility to meet the needs of power users. Our approach to creating interactive plots differs from other interactive charting packages. We found that existing approaches did not meet the highly specialized needs of plotting ROC curves. While ROC curve plots can technically be created with even the most basic plotting tools, we find that specialized functions make the results clearer and more informative. 
 
 Bibliography 
 ===============
