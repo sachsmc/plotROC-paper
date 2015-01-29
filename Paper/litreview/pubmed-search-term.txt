@@ -1,0 +1,1 @@
+Cancer[Text Word] AND (ROC Curve[Text Word] OR ROC analysis[Text Word] OR Receiver operating characteristic curve[Text Word]) AND ((Clinical Trial[ptyp] OR Observational Study[ptyp]) AND "loattrfull text"[sb] AND "2004/10/05"[PDat] : "2014/10/02"[PDat] AND "humans"[MeSH Terms] AND jsubsetaim[text])

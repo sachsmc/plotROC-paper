@@ -1,4 +1,4 @@
-% Created by tikzDevice version 0.7.0 on 2015-01-28 11:45:06
+% Created by tikzDevice version 0.7.0 on 2015-01-29 09:25:23
 % !TEX encoding = UTF-8 Unicode
 \documentclass[10pt]{article}
 
@@ -772,15 +772,15 @@
 	(263.39,275.14) --
 	(263.39,272.24);
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (276.04,309.93) rectangle (412.70,267.61);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (314.83,299.35) rectangle (412.70,267.61);
 
-\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (285.83,295.82) -- (305.42,295.82);
+\path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (322.18,288.77) -- (336.87,288.77);
 
-\path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (285.83,281.71) -- (305.42,281.71);
+\path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (322.18,278.19) -- (336.87,278.19);
 
-\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (315.22,292.39) {Test A: AUC = 0.81};
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.75] at (344.22,286.20) {Test A: AUC = 0.81};
 
-\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  1.00] at (315.22,278.29) {Test B: AUC = 0.64};
+\node[text=drawColor,anchor=base west,inner sep=0pt, outer sep=0pt, scale=  0.75] at (344.22,275.62) {Test B: AUC = 0.64};
 \end{scope}
 \begin{scope}
 \path[clip] ( 40.84, 50.80) rectangle (195.89,175.97);

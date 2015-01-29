@@ -151,7 +151,7 @@ plot_interactive_roc(rocdata)
 
 \begin{figure}[ht]
 \centering
-\includegraphics{screen-shot.pdf}
+\includegraphics{figure/screen-shot.pdf}
 \caption{Screen shot of an interactive plot created with \pkg{plotROC} being displayed in the Rstudio viewer. Hovering the mouse cursor over the plot causes the cutoff label nearest to the cursor to be displayed. Clicking will display a confidence region, if available, and make the label stick until the next click. For live examples, see the package vignette, or go to http://sachsmc.github.io/plotROC. \label{interact}}
 \end{figure}
 
@@ -304,7 +304,7 @@ There are many ways to solve this with \pkg{d3.js}, but we decided to use Vorono
 
 \begin{figure}[ht]
 \centering
-\includegraphics{diagram.pdf}
+\includegraphics{figure/diagram.pdf}
 \caption{Flowchart illustrating the approach that \pkg{plotROC} takes to generate either static plots for print or interactive plots for web-use. \label{flow}}
 \end{figure}
 
