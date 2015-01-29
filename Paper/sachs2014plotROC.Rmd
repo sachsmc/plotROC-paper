@@ -19,12 +19,29 @@ bibliography: plotroc
 
 ```{r setup, echo = FALSE}
 library(knitr)
+library(stringr)
 knit_hooks$set(plot = function(x, options) {
   if ('tikz' %in% options$dev && !options$external) {
     hook_plot_tex(x, options)
   } else hook_plot_md(x, options)
 })
 opts_chunk$set(dev="tikz", comment = NA)
+knit_hooks$set(source = function(x, options){
+  if (!is.null(options$verbatim) && options$verbatim){
+    opts = gsub(",\\s*verbatim\\s*=\\s*TRUE\\s*", "", options$params.src)
+    opts = gsub(",\\s*eval\\s*=\\s*FALSE\\s*", "", opts)
+    bef = sprintf('\n\n    ```{r %s}\n', opts, "\n")
+    stringr::str_c(
+      bef, 
+      knitr:::indent_block(paste(x, collapse = '\n'), "    "), 
+      "\n    ```\n"
+    )
+  } else {
+    stringr::str_c("\n\n```", tolower(options$engine), "\n", 
+      paste(x, collapse = '\n'), "\n```\n\n"
+    )
+  }
+})
 ```
 
 # Introduction
@@ -65,7 +82,7 @@ In the medical literature, FPF and TPF are usually referred to in terms of the j
 
 The ROC curve plot is, at the most basic level, a line graph. Therefore, once the appropriate statistics are estimated, existing plotting functions can be used to create an ROC curve plot. Viewers can identify ROC plots through context, by observing the shape of the line, and through the addition of axis labels, titles, legends, and so on. In our review of the oncology literature, we observed plots with the distinctive characteristics of the plotting functions from Microsoft Office, \proglang{SAS}, \proglang{SPSS}, and the base \proglang{R} plotting functions [@arr]. 
 
-There are several \proglang{R} packages related to ROC curve estimation that contain dedicated plotting functions. The \pkg{ROCR} package [@rocr] plots the FPF versus TPF, as usual, and then takes the interesting approach of encoding the cutoff values as a separate color scale along the ROC curve itself. A legend for the color scale is place along the vertical axis on the right of the plotting region. The \pkg{pROC} package [@pROC] is mainly focused on estimating confidence intervals and regions for restricted ranges of the ROC curve. The plotting methods therein use the base \proglang{R} plotting functions to create nice displays of the curves along with shaded confidence regions. My \pkg{plotROC} package uses the \pkg{ggplot2} [@ggplot2] plotting library to create clear, informative ROC plots, with interactive features for use on the web, and sensible defaults for use in print. 
+There are several \proglang{R} packages related to ROC curve estimation that contain dedicated plotting functions. The \pkg{ROCR} package [@rocr] plots the FPF _versus_ TPF, as usual, and then takes the interesting approach of encoding the cutoff values as a separate color scale along the ROC curve itself. A legend for the color scale is place along the vertical axis on the right of the plotting region. The \pkg{pROC} package [@pROC] is mainly focused on estimating confidence intervals and regions for restricted ranges of the ROC curve. The plotting methods therein use the base \proglang{R} plotting functions to create nice displays of the curves along with shaded confidence regions. My \pkg{plotROC} package uses the \pkg{ggplot2} [@ggplot2] plotting library to create clear, informative ROC plots, with interactive features for use on the web, and sensible defaults for use in print. 
 
 ## Motivation
 
@@ -129,7 +146,7 @@ print(xtable(table1, label = "table1",
 
 The small minority of the figures make any attempt to indicate the values of the test cutoffs, which is an integral component of the ROC curve. We conjecture that this is mainly due to the use of default plotting procedures in statistical software. The software, by default, treats the ROC curve as a 2 dimensional object, obscuring the cutoff dimension. Gridlines and direct labels are also somewhat out of the ordinary. The absence of these features make accurate determination and comparison of the values more difficult. Many of the plots included large tables containing estimates and inference for AUCs, while the ROC curves themselves, numerous and without clear labels or reference lines, merely served as decoration. We aim to solve some of these problems by providing an easy-to-use plotting interface for the ROC curve that provides sensible defaults. 
 
-The panels of figure \ref{figure1} illustrate the most common styles of ROC curve plots, and the associated design elements. We favor the use of gridline and reference lines to facilitate accurate readings off of the axes. Direct labels are preferred over legends because they omit the additional cognitive step of matching line types to labels. Our \pkg{plotROC} package additionally provides plotting of cutoff values, which are displayed interactively with the web-based output option, and direct labels for print use. Exact confidence regions for points on the ROC curve are optionally calculated and displayed. Additionally, we use axis scales are adjusted to be denser near the margins 0 and 1. In medical applications, it is often necessary to have a very low FPR (less than 10%, for instance), therefore the smaller scales are useful for accurately determining values near the margins. The next section details the usage of the \pkg{plotROC} \proglang{R} package and these features. 
+The panels of figure \ref{figure1} illustrate the most common styles of ROC curve plots, and the associated design elements. We favor the use of gridlines and a diagonal reference line to facilitate accurate readings off of the axes. Direct labels are preferred over legends because they omit the additional cognitive step of matching line types or colors to labels. Our \pkg{plotROC} package additionally provides plotting of cutoff values, which are displayed interactively with the web-based output option, and direct labels for print use. Exact confidence regions for points on the ROC curve are optionally calculated and displayed. Additionally, we use axis scales are adjusted to be denser near the margins 0 and 1. In medical applications, it is often necessary to have a very low FPR (less than 10%, for instance), therefore the smaller scales are useful for accurately determining values near the margins. The next section details the usage of the \pkg{plotROC} \proglang{R} package and these features. 
 
 ```{r figure1, fig.width = 6, fig.height = 6, echo = FALSE, fig.cap = "Illustration of design choices in plotting ROC curves. Panel A shows a sparse ROC curve, with no design additions inside the plotting region. The plot results in more white space than anything else. It is difficult to accurately determine values without reference lines. Panel B shows a plot comparing 2 curves, with different line types and a legend. AUCs are also given in the legend. Panels B and C add gridlines, diagonal reference lines, and direct labels. \\label{figure1}"}
 library(plotROC)
@@ -208,7 +225,7 @@ rocdata <- calculate_roc(M.ex, D.ex)
 str(rocdata)
 ```
 
-The same data.frame `rocdata` can be used to generate an interactive plot to view in Rstudio viewer or web browser. A screen shot of an interactive plot is shown in figure \ref{interact}. Hovering over the display shows the cutoff value at the point nearest to the cursor. Clicking makes the cutoff label stick until the next click, and if confidence regions are available, clicks will also display those as grey rectangles. 
+The same data.frame `rocdata` can be used to generate an interactive plot to view in Rstudio viewer or web browser by passing it to the `plot_interactive_roc` function. Give the function an optional path to an html file as an argument called `file` to save the interactive plot as a complete web page. A screen shot of an interactive plot is shown in figure \ref{interact}. Hovering over the display shows the cutoff value at the point nearest to the cursor. Clicking makes the cutoff label stick until the next click, and if confidence regions are available, clicks will also display those as grey rectangles. 
 
 ```{r inter, eval = FALSE}
 plot_interactive_roc(rocdata)
@@ -226,9 +243,9 @@ The `rocdata` is passed to the `ggroc` function with an optional label. This cre
 myrocplot <- ggroc(rocdata, label = "Example")
 ```
 
-We can create an interactive ROC plot using the `export_interactive_roc` function, which returns a character string containing the necessary \proglang{HTML} and \proglang{JavaScript}. The key interactive feature of these plots is that the cutoff values nearest to the mouse cursor are displayed when hovering over the figure. Clicking makes the cutoff label stick until the next click. The character string can be copy-pasted into an html document, or better yet, using \pkg{knitr} [@knitr], we can `cat` the results and use the option `results = 'asis'` so that the interactive plot is displayed correctly. For examples of interactive plots and how to incorporate them into `knitr` documents, see the package vignette (`vignette("examples", package = "plotROC")`) or the webpage https://sachsmc.github.io/plotROC/. Of note is the `prefix` option, which allows the user to assign each plot a unique identifier. This is necessary to prevent conflicts with multiple plots in a single webpage. 
+We can create an interactive ROC plot using the `export_interactive_roc` function, which returns a character string containing the necessary \proglang{HTML} and \proglang{JavaScript}. The key interactive feature of these plots is that the cutoff values nearest to the mouse cursor are displayed when hovering over the figure. Clicking makes the cutoff label stick until the next click. The character string can be copy-pasted into an html document, or better yet, incorporated directly into a dynamic document using \pkg{knitr} [@knitr]. In a \pkg{knitr} document, it is necessary to use the `cat` function on the results and use the chunk option `results = 'asis'` so that the interactive plot is displayed correctly. For documents that contain multiple interactive plots, it is necessary to assign each plot a unique name using the `prefix` argument of `export_interactive_roc`. This is necessary to ensure that the \proglang{JavaScript} code manipulates the correct svg elements. For examples of interactive plots and how to incorporate them into `knitr` documents, see the package vignette (`vignette("examples", package = "plotROC")`) or the web page https://sachsmc.github.io/plotROC/. 
 
-```{r int-no, eval = FALSE}
+```{r int-no, results = 'asis', eval = FALSE, verbatim = TRUE}
 cat(
   export_interactive_roc(myrocplot, cutoffs = rocdata$c, 
                          font.size = "12px", prefix = "a")
@@ -294,7 +311,7 @@ plot_journal_roc(rocplot, datalist)
 
 ### Themes and annotations
 
-`plotROC` uses the `ggplot2` package to create ggplot objects. Therefore, themes and annotations can be added to `ggroc` objects in the usual `ggplot` way. A `plotROC` figure with a new theme, title, axis label, and AUC annotation is shown in figure \ref{annotate}. 
+\pkg{plotROC} uses the \pkg{ggplot2} package to create the objects to be plotted. Therefore, themes and annotations can be added in the usual \pkg{ggplot2} way. A `plot_journal_roc` figure with a new theme, title, axis label, and AUC annotation is shown in figure \ref{annotate}. 
 
 ```{r print2, warning = FALSE, message = FALSE, fig.width = 6, fig.height = 6, fig.cap = "Using \\pkg{ggplot2} themes and annotations with \\pkg{plotROC} objects. \\label{annotate}"}
 library(ggplot2)
