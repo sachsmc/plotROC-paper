@@ -25,12 +25,12 @@ National Cancer Institute		}
   ubiquitous in medical research. Designed to simultaneously display the
   operating characteristics at every possible value of a continuous
   diagnostic test, ROC curves are used in oncology to evaluate screening,
-  diagnostic, prognostic and predictive biomarkers. We reviewed a sample
-  of ROC curve plots from the major oncology journals in order to assess
-  current trends in usage and design elements. Our review suggests that
-  ROC curve plots are often ineffective as statistical charts and that
-  poor design obscures the relevant information the chart is intended to
-  display. We describe our new \proglang{R} package that was created to
+  diagnostic, prognostic and predictive biomarkers. I reviewed a sample of
+  ROC curve plots from the major oncology journals in order to assess
+  current trends in usage and design elements. My review suggests that ROC
+  curve plots are often ineffective as statistical charts and that poor
+  design obscures the relevant information the chart is intended to
+  display. I describe my new \proglang{R} package that was created to
   address the shortcomings of existing tools. The package has functions to
   create informative ROC curve plots, with sensible defaults, for use in
   print or as an interactive web-based plot. A web application was
@@ -82,9 +82,9 @@ also been used for decades in signal detection theory.
 
 The accuracy of a diagnostic test can be evaluated by considering two
 possible types of errors: false positives, and false negatives. For a
-continuous measurement that we denote as \(M\), convention dictates that
+continuous measurement that I denote as \(M\), convention dictates that
 a test positive is defined as \(M\) exceeding some fixed threshold
-\(c\): \(M > c\). In reference to the binary outcome that we denote as
+\(c\): \(M > c\). In reference to the binary outcome that I denote as
 \(D\), a good outcome of the test is when the test is positive for an
 individual who truly has a disease: \(D = 1\). A bad outcome is when the
 test is positive for an individual who does not have the disease
@@ -100,7 +100,7 @@ the healthy population:
 
 \[ FPF(c) = P\{ M > c | D = 0 \} \]
 
-Since the cutoff \(c\) is not fixed in advance, we can plot the TPF
+Since the cutoff \(c\) is not fixed in advance, I can plot the TPF
 against the FPF for all possible values of \(c\). This is exactly what
 the ROC curve is, a plot of \(FPF(c)\) on the \(x\) axis and \(TPF(c)\)
 along the \(y\) axis as \(c\) varies. A useless test that is not
@@ -111,7 +111,7 @@ about disease status has \(TPF(c) = 1\) and \(FPF(c) = 0\) for all
 \(c\).
 
 Given a sample of test and disease status pairs,
-\((M_1, D_1), \ldots, (M_n, D_n)\), we can estimate the ROC curve by
+\((M_1, D_1), \ldots, (M_n, D_n)\), I can estimate the ROC curve by
 computing proportions in the diseased and healthy subgroups separately.
 Specifically, given a fixed cutoff \(c\), an estimate of the \(TPF(c)\)
 is
@@ -127,7 +127,7 @@ Other methods exist to estimate the ROC curve, such as the binormal
 parametric estimate which can be used to get a smooth curve. There are
 also extensions that allow for estimation with time-to-event outcomes
 subject to censoring. For a more thorough reference on the methods and
-theory surrounding ROC curves, we refer interested readers to
+theory surrounding ROC curves, I refer interested readers to
 \citet{pepe2003statistical}.
 
 A common way to summarize the value of a test for classifying disease
@@ -168,7 +168,7 @@ of the jargon sensitivity and specificity. Sensitivity is equivalent to
 the true positive fraction. Specificity is 1 - FPF, the true negative
 fraction. Sometimes, the FPF and TPF are incorrectly referred to as
 rates, using the abbreviations FPR and TPR. These are probabilities and
-their estimates are proportions, therefore we prefer the use of the term
+their estimates are proportions, therefore I prefer the use of the term
 fraction as opposed to rate.
 
 \subsection{Existing Plotting
@@ -178,18 +178,18 @@ The ROC curve plot is, at the most basic level, a line graph. Therefore,
 once the appropriate statistics are estimated, existing plotting
 functions can be used to create an ROC curve plot. Viewers can identify
 ROC plots through context, by observing the shape of the line, and
-through the addition of axis labels, titles, legends, and so on. In our
-review of the oncology literature, we observed plots with the
-distinctive characteristics of the plotting functions from Microsoft
-Office, \proglang{SAS}, \proglang{SPSS}, and the base \proglang{R}
-plotting functions \citep{arr}.
+through the addition of axis labels, titles, legends, and so on. In my
+review of the oncology literature, I observed plots with the distinctive
+characteristics of the plotting functions from Microsoft Office,
+\proglang{SAS}, \proglang{SPSS}, and the base \proglang{R} plotting
+functions \citep{arr}.
 
 There are several \proglang{R} packages related to ROC curve estimation
 that contain dedicated plotting functions. The \pkg{ROCR} package
 \citep{rocr} plots the FPF \emph{versus} TPF, as usual, and then takes
 the interesting approach of encoding the cutoff values as a separate
 color scale along the ROC curve itself. A legend for the color scale is
-place along the vertical axis on the right of the plotting region. The
+placed along the vertical axis on the right of the plotting region. The
 \pkg{pROC} package \citep{pROC} is mainly focused on estimating
 confidence intervals and regions for restricted ranges of the ROC curve.
 The plotting methods therein use the base \proglang{R} plotting
@@ -202,9 +202,9 @@ use in print.
 \subsection{Motivation}\label{motivation}
 
 Anyone giving a cursory look at any of the major medical journals is
-likely to find at least one ROC curve plot. We sought to assess the
-usage of ROC curve plots and to evaluate the design choices made in the
-current oncology literature by conducting a small literature review. We
+likely to find at least one ROC curve plot. I sought to assess the usage
+of ROC curve plots and to evaluate the design choices made in the
+current oncology literature by conducting a small literature review. I
 searched Pubmed for clinical trials or observational studies in humans
 reported in major oncology journals for the past 10 years for the terms
 ``ROC Curve'' OR ``ROC Analysis'' OR ``Receiver operating characteristic
@@ -257,7 +257,7 @@ Number of curves &  \\
 
 The small minority of the figures make any attempt to indicate the
 values of the test cutoffs, which is an integral component of the ROC
-curve. We conjecture that this is mainly due to the use of default
+curve. I conjecture that this is mainly due to the use of default
 plotting procedures in statistical software. The software, by default,
 treats the ROC curve as a 2 dimensional object, obscuring the cutoff
 dimension. Gridlines and direct labels are also somewhat out of the
@@ -265,25 +265,25 @@ ordinary. The absence of these features make accurate determination and
 comparison of the values more difficult. Many of the plots included
 large tables containing estimates and inference for AUCs, while the ROC
 curves themselves, numerous and without clear labels or reference lines,
-merely served as decoration. We aim to solve some of these problems by
+merely served as decoration. I aim to solve some of these problems by
 providing an easy-to-use plotting interface for the ROC curve that
 provides sensible defaults.
 
 The panels of figure \ref{figure1} illustrate the most common styles of
-ROC curve plots, and the associated design elements. We favor the use of
+ROC curve plots, and the associated design elements. I favor the use of
 gridlines and a diagonal reference line to facilitate accurate readings
 off of the axes. Direct labels are preferred over legends because they
 omit the additional cognitive step of matching line types or colors to
-labels. Our \pkg{plotROC} package additionally provides plotting of
+labels. My \pkg{plotROC} package additionally provides plotting of
 cutoff values, which are displayed interactively with the web-based
 output option, and direct labels for print use. Exact confidence regions
 for points on the ROC curve are optionally calculated and displayed.
-Additionally, we use axis scales are adjusted to be denser near the
-margins 0 and 1. In medical applications, it is often necessary to have
-a very low FPR (less than 10\%, for instance), therefore the smaller
-scales are useful for accurately determining values near the margins.
-The next section details the usage of the \pkg{plotROC} \proglang{R}
-package and these features.
+Additionally, I use axis scales adjusted to be denser near the margins 0
+and 1. In medical applications, it is often necessary to have a very low
+FPR (less than 10\%, for instance), therefore the smaller scales are
+useful for accurately determining values near the margins. The next
+section details the usage of the \pkg{plotROC} \proglang{R} package and
+these features.
 
 \begin{figure}[htbp]
 \centering
@@ -301,7 +301,7 @@ diagonal reference lines, and direct labels. \label{figure1}}
 
 \subsection{Shiny application}\label{shiny-application}
 
-We created a \pkg{shiny} application \citep{shiny} in order to make the
+I created a \pkg{shiny} application \citep{shiny} in order to make the
 features more accessible to non-\proglang{R} users. A limited subset of
 the functions of the \pkg{plotROC} can be performed on an example
 dataset or on data that users upload to the website. Resulting plots can
@@ -329,7 +329,7 @@ shiny_plotROC()
 
 \subsection{Command line basic usage}\label{command-line-basic-usage}
 
-We start by creating an example data set. The marker we generate is
+I start by creating an example data set. The marker I generate is
 moderately accurate for predicting disease status.
 
 \begin{verbatim}
@@ -337,15 +337,15 @@ D.ex <- rbinom(100, size = 1, prob = .5)
 M.ex <- rnorm(100, mean = D.ex)
 \end{verbatim}
 
-Next we use the \texttt{calculate\_roc} function to compute the
-empirical ROC curve. The disease status need not be coded as 0/1, but if
-it is not, \texttt{calculate\_roc} assumes (with a warning) that the
-lowest value in sort order signifies disease-free status. This returns a
+Next I use the \texttt{calculate\_roc} function to compute the empirical
+ROC curve. The disease status need not be coded as 0/1, but if it is
+not, \texttt{calculate\_roc} assumes (with a warning) that the lowest
+value in sort order signifies disease-free status. This returns a
 dataframe with three columns: the cutoff values, the TPF and the FPF.
 
 \begin{verbatim}
-rocdata <- calculate_roc(M.ex, D.ex)
-str(rocdata)
+roc.estimate <- calculate_roc(M.ex, D.ex)
+str(roc.estimate)
 \end{verbatim}
 
 \begin{verbatim}
@@ -355,9 +355,17 @@ str(rocdata)
  $ FPF: num  0.981 0.962 0.943 0.925 0.906 ...
 \end{verbatim}
 
-The same data.frame \texttt{rocdata} can be used to generate an
-interactive plot to view in Rstudio viewer or web browser by passing it
-to the \texttt{plot\_interactive\_roc} function. Give the function an
+The \texttt{rocdata} is passed to the \texttt{ggroc} function with an
+optional label. This creates a ggplot object of the ROC curve using the
+\pkg{ggplot2} package \citep{ggplot2}.
+
+\begin{verbatim}
+single.rocplot <- ggroc(roc.estimate, label = "Example")
+\end{verbatim}
+
+The \texttt{myrocplot} object can be used to create an interactive plot
+and display it in the Rstudio viewer or default web browser by passing
+it to the \texttt{plot\_interactive\_roc} function. Give the function an
 optional path to an html file as an argument called \texttt{file} to
 save the interactive plot as a complete web page. A screen shot of an
 interactive plot is shown in figure \ref{interact}. Hovering over the
@@ -367,7 +375,7 @@ confidence regions are available, clicks will also display those as grey
 rectangles.
 
 \begin{verbatim}
-plot_interactive_roc(rocdata)
+plot_interactive_roc(single.rocplot)
 \end{verbatim}
 
 \begin{figure}[ht]
@@ -376,24 +384,13 @@ plot_interactive_roc(rocdata)
 \caption{Screen shot of an interactive plot created with \pkg{plotROC} being displayed in the Rstudio viewer. Hovering the mouse cursor over the plot causes the cutoff label nearest to the cursor to be displayed. Clicking will display a confidence region, if available, and make the label stick until the next click. For live examples, see the package vignette, or go to http://sachsmc.github.io/plotROC. \label{interact}}
 \end{figure}
 
-The \texttt{rocdata} is passed to the \texttt{ggroc} function with an
-optional label. This creates a ggplot object of the ROC curve using the
-\pkg{ggplot2} package \citep{ggplot2}.
-
-\begin{verbatim}
-myrocplot <- ggroc(rocdata, label = "Example")
-\end{verbatim}
-
-We can create an interactive ROC plot using the
+An interactive ROC plot can be exported by using the
 \texttt{export\_interactive\_roc} function, which returns a character
 string containing the necessary \proglang{HTML} and
-\proglang{JavaScript}. The key interactive feature of these plots is
-that the cutoff values nearest to the mouse cursor are displayed when
-hovering over the figure. Clicking makes the cutoff label stick until
-the next click. The character string can be copy-pasted into an html
-document, or better yet, incorporated directly into a dynamic document
-using \pkg{knitr} \citep{knitr}. In a \pkg{knitr} document, it is
-necessary to use the \texttt{cat} function on the results and use the
+\proglang{JavaScript}. The character string can be copy-pasted into an
+html document, or better yet, incorporated directly into a dynamic
+document using \pkg{knitr} \citep{knitr}. In a \pkg{knitr} document, it
+is necessary to use the \texttt{cat} function on the results and use the
 chunk option \texttt{results = \textquotesingle{}asis\textquotesingle{}}
 so that the interactive plot is displayed correctly. For documents that
 contain multiple interactive plots, it is necessary to assign each plot
@@ -401,26 +398,28 @@ a unique name using the \texttt{prefix} argument of
 \texttt{export\_interactive\_roc}. This is necessary to ensure that the
 \proglang{JavaScript} code manipulates the correct svg elements. For
 examples of interactive plots and how to incorporate them into
-\texttt{knitr} documents, see the package vignette
+\pkg{knitr} documents, see the package vignette
 (\texttt{vignette("examples", package = "plotROC")}) or the web page
-https://sachsmc.github.io/plotROC/.
+https://sachsmc.github.io/plotROC/. The next code block shows an example
+\pkg{knitr} chunk that can be used in an .Rmd document to display an
+interactive plot.
 
 \begin{verbatim}
 ```{r int-no, results = 'asis'}
 cat(
-  export_interactive_roc(myrocplot, cutoffs = rocdata$c, 
-                         font.size = "12px", prefix = "a")
+  export_interactive_roc(single.rocplot, 
+                        prefix = "a")
   )
 ```
 \end{verbatim}
 
-The same \texttt{ggroc} object that we called \texttt{myrocplot} can be
+The same \texttt{ggroc} object that I called \texttt{myrocplot} can be
 used to generate an ROC plot suitable for use in print. It annotates the
 cutoff values and is completely in black and white. A simple example
 with the default options is shown in figure \ref{first}.
 
 \begin{verbatim}
-plot_journal_roc(myrocplot, rocdata)
+plot_journal_roc(single.rocplot)
 \end{verbatim}
 
 \begin{figure}[htbp]
@@ -430,19 +429,83 @@ plot_journal_roc(myrocplot, rocdata)
 use in print. \label{first}}
 \end{figure}
 
+\subsubsection{Multiple ROC curves}\label{multiple-roc-curves}
+
+If you have multiple tests of different types measured on the same
+subjects, you can use the \texttt{calculate\_multi\_roc} function to
+compute the empirical ROC curve for each test. It returns a list of data
+frames with the estimates and cutoff values. Then the
+\texttt{multi\_ggroc} function creates the appropriate type of
+\texttt{ggplot} object. Confidence regions are not supported for
+multiple curves at the time of writing.
+
+\begin{verbatim}
+D.ex <- rbinom(100, 1, .5)
+
+paired.data <- data.frame(M1 = rnorm(100, mean = D.ex), 
+                       M2 = rnorm(100, mean = D.ex, sd = .4), 
+                       M3 = runif(100), D = D.ex)
+
+estimate.list <- calculate_multi_roc(paired.data, c("M1", "M2", "M3"), "D")
+\end{verbatim}
+
+Labels can be added easily with the \texttt{label} option of
+\texttt{multi\_ggroc}. The length of the label element should match the
+number of plotted curves. The \texttt{multi\_ggroc} object can be passed
+to the \texttt{plot\_journal\_roc} and the
+\texttt{export\_interactive\_roc} functions, as desired. The resulting
+plot is shown in figure \ref{multi}.
+
+\begin{verbatim}
+multi.rocplot <- multi_ggroc(estimate.list, label = c("M1", "M2", "M3"))
+plot_journal_roc(multi.rocplot)
+\end{verbatim}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{figure/multi2-1.pdf}
+\caption{Illustration of \pkg{plotROC} plot with multiple curves.
+\label{multi}}
+\end{figure}
+
+Both \texttt{plot\_journal\_roc} and \texttt{export\_interactive\_roc}
+support a number of options to customize the look of the plots. By
+default, multiple curves are distinguished by different line types and
+direct labels. For multiple ROC curves that are similar to one another,
+those defaults can make it difficult to interpret the plots. Therefore,
+we also support colors and legends. The x- and y-axis can be changed by
+passing options to \texttt{ggroc} or \texttt{multi\_ggroc}. The next
+code block illustrates the available options.
+
+\begin{verbatim}
+colorplot <- multi_ggroc(estimate.list, 
+                         xlabel = "1 - Specificity", 
+                         ylabel = "Sensitivity")
+cat(
+  export_interactive_roc(colorplot, lty = rep(1, 3), 
+                         color = c("black", "purple", "orange"), 
+                         legend = TRUE)
+  )
+\end{verbatim}
+
 \subsection{Advanced options}\label{advanced-options}
 
 \subsubsection{Click to view confidence
 region}\label{click-to-view-confidence-region}
 
-We use the \texttt{ci = TRUE} option in \texttt{calculcate\_roc} and
+I use the \texttt{ci = TRUE} option in \texttt{calculcate\_roc} and
 \texttt{ggroc} to compute confidence regions for points on the ROC curve
-using the \citet{clopper1934use} exact method. The significance level
-can be specified using the \texttt{alpha} option.
+using the \citet{clopper1934use} exact method. Briefly, exact confidence
+intervals are calculated for the \(FPF\) and \(TPF\) separately, each at
+level \(1 - \sqrt{1 - \alpha}\). Based on result 2.4 from
+\citet{pepe2003statistical}, the cross-product of these intervals yields
+a \(100 * (1 - \alpha)\) percent rectangular confidence region for the
+pair. The significance level can be specified using the \texttt{alpha}
+option.
 
 \begin{verbatim}
-rocdata <- calculate_roc(M.ex, D.ex, ci = TRUE, alpha = 0.05)
-myrocplot <- ggroc(rocdata, label = "Example", ci = TRUE)
+roc.ci <- calculate_roc(paired.data$M1, paired.data$D, ci = TRUE, alpha = 0.05)
+ci.rocplot <- ggroc(roc.ci, label = "CI Example", ci = TRUE)
 \end{verbatim}
 
 For interactive plots, the confidence regions are automatically
@@ -452,16 +515,16 @@ region stick until the next click.
 
 \begin{verbatim}
 cat(
-  export_interactive_roc(myrocplot, cutoffs = rocdata$c, 
-                         font.size = "12px", prefix = "aci")
+  export_interactive_roc(ci.rocplot, 
+                         prefix = "aci")
   )
 \end{verbatim}
 
-For use in print, we pass a small vector of cutoff locations at which to
+For use in print, I pass a small vector of cutoff locations at which to
 display the confidence regions. This is shown in figure \ref{conf}.
 
 \begin{verbatim}
-plot_journal_roc(myrocplot, rocdata, n.cuts = 10, 
+plot_journal_roc(ci.rocplot, n.cuts = 10, 
                  ci.at = c(-.5, .5, 2.1))
 \end{verbatim}
 
@@ -470,45 +533,6 @@ plot_journal_roc(myrocplot, rocdata, n.cuts = 10,
 \includegraphics{figure/printci-1.pdf}
 \caption{Illustration of \pkg{plotROC} plot with exact confidence
 regions. \label{conf}}
-\end{figure}
-
-\subsubsection{Multiple ROC curves}\label{multiple-roc-curves}
-
-If you have multiple tests of different types on the same subjects, you
-can use the \texttt{calculate\_multi\_roc} function to compute the
-empirical ROC curve for each test. Then the \texttt{multi\_ggroc}
-function creates the appropriate type of \texttt{ggplot} object.
-Confidence regions are not supported for multiple curves at the time of
-writing.
-
-\begin{verbatim}
-D.ex <- rbinom(100, 1, .5)
-
-fakedata <- data.frame(M1 = rnorm(100, mean = D.ex), 
-                       M2 = rnorm(100, mean = D.ex, sd = .4), 
-                       M3 = runif(100), D = D.ex)
-
-datalist <- calculate_multi_roc(fakedata, c("M1", "M2", "M3"), "D")
-rocplot <- multi_ggroc(datalist)
-\end{verbatim}
-
-This multi ggroc object can be passed to the \texttt{plot\_journal\_roc}
-and the \texttt{export\_interactive\_roc} functions, as desired.
-
-Labels can be added easily with the \texttt{label} option. The length of
-the label element should match the number of plotted curves. The
-resulting plot is shown in figure \ref{multi}.
-
-\begin{verbatim}
-rocplot <- multi_ggroc(datalist, label = c("M1", "M2", "M3"))
-plot_journal_roc(rocplot, datalist)
-\end{verbatim}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics{figure/multi2-1.pdf}
-\caption{Illustration of \pkg{plotROC} plot with multiple curves.
-\label{multi}}
 \end{figure}
 
 \subsubsection{Themes and annotations}\label{themes-and-annotations}
@@ -521,14 +545,14 @@ theme, title, axis label, and AUC annotation is shown in figure
 
 \begin{verbatim}
 library(ggplot2)
-plot_journal_roc(myrocplot, rocdata) + 
+plot_journal_roc(ci.rocplot, n.cuts = 10, 
+                 ci.at = c(-.5, .5, 2.1)) + 
   theme_grey() + 
   geom_abline(intercept = 0, slope = 1, color = "white") + 
   ggtitle("Themes and annotations") + 
   annotate("text", x = .75, y = .25, 
-           label = "AUC = 0.80") + 
-  scale_y_continuous("Sensitivity") + 
-  scale_x_continuous("1 - Specificity")
+           label = "AUC = 0.80") +
+  scale_x_continuous("1 - Specificity", breaks = seq(0, 1, by = .1))
 \end{verbatim}
 
 \begin{figure}[htbp]
@@ -541,7 +565,7 @@ objects. \label{annotate}}
 \subsubsection{Other estimation methods}\label{other-estimation-methods}
 
 By default \texttt{calculate\_roc} computes the empirical ROC curve.
-There are other estimation methods out there, as we have summarized in
+There are other estimation methods out there, as I have summarized in
 the introduction. Any estimation method can be used, as long as the
 cutoff, the TPF and the FPF are returned. Then you can simply pass those
 values in a data frame to the \texttt{ggroc} function. For example, let
@@ -559,18 +583,18 @@ s1 <- sd(M.ex[D.ex == 1])
 s0 <- sd(M.ex[D.ex == 0])
 c.ex <- seq(min(M.ex), max(M.ex), length.out = 300)
 
-binorm_rocdata <- data.frame(c = c.ex, 
+binorm.roc <- data.frame(c = c.ex, 
                              FPF = pnorm((mu0 - c.ex)/s0), 
                              TPF = pnorm((mu1 - c.ex)/s1)
                              )
 \end{verbatim}
 
-Then we can pass this data.frame to the \texttt{ggroc} function as
+Then I can pass this data.frame to the \texttt{ggroc} function as
 before. The example is shown in figure \ref{binorm}.
 
 \begin{verbatim}
-binorm_plot <- ggroc(binorm_rocdata, label = "Binormal")
-plot_journal_roc(binorm_plot, binorm_rocdata)
+binorm.plot <- ggroc(binorm.roc, label = "Binormal")
+plot_journal_roc(binorm.plot)
 \end{verbatim}
 
 \begin{figure}[htbp]
@@ -601,16 +625,16 @@ available.
 \pkg{plotROC} makes interactive plots by first converting the
 \texttt{ggplot} object into a scalable vector graphic (svg) object with
 the \texttt{grid.export} function. This function maps each element of
-the plot to a corresponding element of the svg markup language. We keep
-track of the names of the points and labels elements so that we can add
+the plot to a corresponding element of the svg markup language. I keep
+track of the names of the points and labels elements so that I can add
 interactivity using \pkg{d3.js} and \proglang{JavaScript}. The main
-interactive feature we wanted was to be able to display the cutoff
-labels at the points on the ROC curve closest to the mouse cursor.
+interactive feature I wanted was to be able to display the cutoff labels
+at the points on the ROC curve closest to the mouse cursor.
 
-There are many ways to solve this with \pkg{d3.js}, but we decided to
-use Voronoi polygons to map the cursor location to the nearest point on
-the ROC curve. The idea is that for the set of cutoff points along the
-ROC curve, the \texttt{d3.geom.voronoi} function chain computes a set of
+There are many ways to solve this with \pkg{d3.js}, but I decided to use
+Voronoi polygons to map the cursor location to the nearest point on the
+ROC curve. The idea is that for the set of cutoff points along the ROC
+curve, the \texttt{d3.geom.voronoi} function chain computes a set of
 polygons overlaying the plotting region such that the area of each
 polygon contains the region of the plot closest to it's corresponding
 cutoff point. Hover events are bound to the polygons so that when the
@@ -631,7 +655,7 @@ returned in the character string provided by
 This approach is similar to what is done in the \pkg{gridSVG}
 \texttt{grid.animate} function, which uses the svg
 \texttt{\textless{}animate /\textgreater{}} tags. However, the available
-features were not sufficient for our needs, which is why we used
+features were not sufficient for my needs, which is why I used
 \pkg{d3.js}. There are several other \proglang{R} packages that aim to
 create interactive figures. The authors of \pkg{animint} \citep{animint}
 created an extensive \proglang{JavaScript} library that creates plots in
@@ -648,15 +672,15 @@ distinctive \proglang{R} style.
 
 \section{Discussion}\label{discussion}
 
-Here we have illustrated the usage and described the mechanics of a new
+Here I have illustrated the usage and described the mechanics of a new
 \proglang{R} package for creating ROC curve plots. The functions are
 easy to use, even for non-\proglang{R} users \emph{via} the web
 application, yet have sufficient flexibility to meet the needs of power
-users. Our approach to creating interactive plots differs from other
-interactive charting packages. We found that existing approaches did not
+users. My approach to creating interactive plots differs from other
+interactive charting packages. I found that existing approaches did not
 meet the highly specialized needs of plotting ROC curves. While ROC
 curve plots can technically be created with even the most basic plotting
-tools, we find that specialized functions make the results clearer and
+tools, I find that specialized functions make the results clearer and
 more informative.
 
 

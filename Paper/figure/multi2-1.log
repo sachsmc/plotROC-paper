@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  29 JAN 2015 14:59
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  30 JAN 2015 14:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -418,7 +418,7 @@ e
 Preview: Fontsize 10pt
 Preview: PDFoutput 1
 
-Overfull \hbox (88.62pt too wide) in paragraph at lines 1443--1443
+Overfull \hbox (88.62pt too wide) in paragraph at lines 1444--1444
 [][] 
  []
 
@@ -427,16 +427,16 @@ Preview: Tightpage 0 0 0 0
 Non-PDF special ignored!
 Non-PDF special ignored!] (./multi2-1.aux) ) 
 Here is how much of TeX's memory you used:
- 10112 strings out of 493315
- 194908 string characters out of 6137904
+ 10113 strings out of 493315
+ 194926 string characters out of 6137904
  272978 words of memory out of 5000000
- 13383 multiletter control sequences out of 15000+600000
+ 13384 multiletter control sequences out of 15000+600000
  3640 words of font info for 14 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  56i,7n,55p,399b,591s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2013/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on multi2-1.pdf (1 page, 24426 bytes).
+Output written on multi2-1.pdf (1 page, 24429 bytes).
 PDF statistics:
  15 PDF objects out of 1000 (max. 8388607)
  10 compressed objects within 1 object stream
