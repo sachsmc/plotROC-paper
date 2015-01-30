@@ -7,7 +7,7 @@ Author: Michael C Sachs
 - make
 - R (3.1.2) and R packages
 	+ knitr (1.8)
-	+ plotROC (1.3)
+	+ plotROC (1.3.2) [available at http://github.com/sachsmc/plotROC]
 	+ stringr (0.6.2)
 	+ xtable (1.7-4)
 	+ ggplot2 (1.0.0)
