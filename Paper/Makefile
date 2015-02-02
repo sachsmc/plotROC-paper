@@ -10,7 +10,7 @@
 	bibtex $(basename $<)
 	pdflatex $(basename $<)
 	pdflatex $(basename $<)
-	rm -f *.aux *.bcf *.blg *.log *.out *.bbl
+	rm -f *.aux *.bcf *.blg *.log *.out
 
 clean:
 	rm -f *.pdf *.tex *.aux *.bcf *.blg *.log *.out *.bbl

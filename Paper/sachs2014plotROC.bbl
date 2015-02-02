@@ -1,0 +1,120 @@
+\begin{thebibliography}{16}
+\newcommand{\enquote}[1]{``#1''}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{Bostock \emph{et~al.}(2011)Bostock, Ogievetsky, and
+  Heer}]{bostock2011d3}
+Bostock M, Ogievetsky V, Heer J (2011).
+\newblock \enquote{D$^3$ data-driven documents.}
+\newblock \emph{Visualization and Computer Graphics, IEEE Transactions on},
+  \textbf{17}(12), 2301--2309.
+
+\bibitem[{Broman(2015)}]{qtlcharts}
+Broman KW (2015).
+\newblock \emph{Web-based interactive charts (using D3.js) for the analysis of
+  experimental crosses to identify genetic loci (quantitative trait loci, QTL)
+  contributing to variation in quantitative traits.}
+\newblock R package version 0.3-9,
+  \urlprefix\url{http://kbroman.org/qtlcharts/}.
+
+\bibitem[{Clopper and Pearson(1934)}]{clopper1934use}
+Clopper C, Pearson ES (1934).
+\newblock \enquote{The use of confidence or fiducial limits illustrated in the
+  case of the binomial.}
+\newblock \emph{Biometrika}, \textbf{26}(4), 404--413.
+
+\bibitem[{Heagerty \emph{et~al.}(2000)Heagerty, Lumley, and
+  Pepe}]{heagerty2000time}
+Heagerty PJ, Lumley T, Pepe MS (2000).
+\newblock \enquote{Time-dependent ROC curves for censored survival data and a
+  diagnostic marker.}
+\newblock \emph{Biometrics}, \textbf{56}(2), 337--344.
+
+\bibitem[{Hocking \emph{et~al.}(2014)Hocking, Sievert, and
+  VanderPlas}]{animint}
+Hocking TD, Sievert C, VanderPlas S (2014).
+\newblock \emph{\pkg{animint}: a Grammar for Interactive Animations}.
+\newblock \proglang{R}~package version~2014.12.4,
+  \urlprefix\url{https://github.com/tdhock/animint}.
+
+\bibitem[{Murrell and Potter(2014)}]{gridsvg}
+Murrell P, Potter S (2014).
+\newblock \emph{gridSVG: Export grid Graphics as SVG}.
+\newblock R package version 1.4-2,
+  \urlprefix\url{http://CRAN.R-project.org/package=gridSVG}.
+
+\bibitem[{Pepe(2003)}]{pepe2003statistical}
+Pepe MS (2003).
+\newblock \emph{The statistical evaluation of medical tests for classification
+  and prediction}.
+\newblock Oxford University Press.
+
+\bibitem[{{R Core Team}(2014)}]{arr}
+{R Core Team} (2014).
+\newblock \emph{R: A Language and Environment for Statistical Computing}.
+\newblock R Foundation for Statistical Computing, Vienna, Austria.
+\newblock \urlprefix\url{http://www.R-project.org/}.
+
+\bibitem[{Reinholdsson \emph{et~al.}(2014)Reinholdsson, Russell, and
+  Vaidyanathan}]{rcharts}
+Reinholdsson T, Russell K, Vaidyanathan R (2014).
+\newblock \emph{Interactive Charts using \proglang{Javascript} Visualization
+  Libraries}.
+\newblock \proglang{R}~package version~0.4.5,
+  \urlprefix\url{http://ramnathv.github.io/rCharts/}.
+
+\bibitem[{Robin \emph{et~al.}(2011)Robin, Turck, Hainard, Tiberti, Lisacek,
+  Sanchez, and M{\"u}ller}]{pROC}
+Robin X, Turck N, Hainard A, Tiberti N, Lisacek F, Sanchez JC, M{\"u}ller M
+  (2011).
+\newblock \enquote{pROC: an open-source package for R and S+ to analyze and
+  compare ROC curves.}
+\newblock \emph{BMC Bioinformatics}, \textbf{12}, 77.
+
+\bibitem[{{RStudio} and {Inc.}(2014{\natexlab{a}})}]{ggvis}
+{RStudio}, {Inc} (2014{\natexlab{a}}).
+\newblock \emph{ggvis: Interactive grammar of graphics}.
+\newblock R package version 0.4,
+  \urlprefix\url{http://CRAN.R-project.org/package=ggvis}.
+
+\bibitem[{{RStudio} and {Inc.}(2014{\natexlab{b}})}]{shiny}
+{RStudio}, {Inc} (2014{\natexlab{b}}).
+\newblock \emph{shiny: Web Application Framework for R}.
+\newblock R package version 0.10.2.2,
+  \urlprefix\url{http://CRAN.R-project.org/package=shiny}.
+
+\bibitem[{Sing \emph{et~al.}(2005)Sing, Sander, Beerenwinkel, and
+  Lengauer}]{rocr}
+Sing T, Sander O, Beerenwinkel N, Lengauer T (2005).
+\newblock \enquote{ROCR: visualizing classifier performance in R.}
+\newblock \emph{Bioinformatics}, \textbf{21}(20), 7881.
+\newblock \urlprefix\url{http://rocr.bioinf.mpi-sb.mpg.de}.
+
+\bibitem[{Vaidyanathan \emph{et~al.}(2014)Vaidyanathan, Cheng, Allaire, Xie,
+  and Russell}]{htmlwidgets}
+Vaidyanathan R, Cheng J, Allaire J, Xie Y, Russell K (2014).
+\newblock \emph{htmlwidgets: HTML Widgets for R}.
+\newblock R package version 0.3.2,
+  \urlprefix\url{http://CRAN.R-project.org/package=htmlwidgets}.
+
+\bibitem[{Wickham(2009)}]{ggplot2}
+Wickham H (2009).
+\newblock \emph{ggplot2: elegant graphics for data analysis}.
+\newblock Springer New York.
+\newblock ISBN 978-0-387-98140-6.
+\newblock \urlprefix\url{http://had.co.nz/ggplot2/book}.
+
+\bibitem[{Xie(2014)}]{knitr}
+Xie Y (2014).
+\newblock \emph{knitr: A General-Purpose Package for Dynamic Report Generation
+  in R.}
+\newblock R package version 1.8.
+
+\end{thebibliography}

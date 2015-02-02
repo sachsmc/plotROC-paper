@@ -331,12 +331,45 @@ There are many ways to solve this with \pkg{d3.js}, but I decided to use Voronoi
 \caption{Flowchart illustrating the approach that \pkg{plotROC} takes to generate either static plots for print or interactive plots for web-use. \label{flow}}
 \end{figure}
 
-This approach is similar to what is done in the \pkg{gridSVG} `grid.animate` function, which uses the svg `<animate />` tags. However, the available features were not sufficient for my needs, which is why I used \pkg{d3.js}. There are several other \proglang{R} packages that aim to create interactive figures. The authors of \pkg{animint} [@animint] created an extensive \proglang{JavaScript} library that creates plots in a similar way as \pkg{ggplot2}. A set of interactive features can be added to plots using \pkg{d3.js}. \pkg{ggvis} [@ggvis], \pkg{rCharts} [@rcharts], and the more recently released \pkg{htmlwidgets} [@htmlwidgets] all leverage existing charting libraries written in \proglang{JavaScript}. Their general approach is to manipulate the data and create options in \proglang{R}, and then let the charting libraries handle the rendering and interactivity. \pkg{plotROC} lets \proglang{R} do the rendering, allowing the figures to be consistent across print and web-based media, and retaining the distinctive \proglang{R} style. 
+This approach is similar to what is done in the \pkg{gridSVG} `grid.animate` function, which uses the svg `<animate />` tags. However, the available features were not sufficient for my needs, which is why I used \pkg{d3.js}. There are several other \proglang{R} packages that aim to create interactive figures. The authors of \pkg{animint} [@animint] created an extensive \proglang{JavaScript} library that creates plots in a similar way as \pkg{ggplot2}. A set of interactive features can be added to plots using \pkg{d3.js}. \pkg{ggvis} [@ggvis], \pkg{rCharts} [@rcharts], and the more recently released \pkg{htmlwidgets} [@htmlwidgets] all leverage existing charting libraries written in \proglang{JavaScript}. \pkg{qtlcharts} [@qtlcharts] uses a set of custom \proglang{JavaScript} and \pkg{d3.js} functions to visualize data from genetic experiments. Their general approach is to manipulate the data and create options in \proglang{R}, and then let the charting libraries or functions handle the rendering and interactivity. \pkg{plotROC} lets \proglang{R} do the rendering, allowing the figures to be consistent across print and web-based media, and retaining the distinctive \proglang{R} style. This also allows users to manipulate the figures directly in \proglang{R} to suit their needs, using tools that are more accessible and familiar to most \proglang{R} users. 
 
 
 # Discussion
 
 Here I have illustrated the usage and described the mechanics of a new \proglang{R} package for creating ROC curve plots. The functions are easy to use, even for non-\proglang{R} users _via_ the web application, yet have sufficient flexibility to meet the needs of power users. My approach to creating interactive plots differs from other interactive charting packages. I found that existing approaches did not meet the highly specialized needs of plotting ROC curves. While ROC curve plots can technically be created with even the most basic plotting tools, I find that specialized functions make the results clearer and more informative. 
+
+## Reproducibility Note
+
+This manuscript is completely reproducible using the source files available at http://github.com/sachsmc/plotROC-paper. The output below indicates the \proglang{R} packages and versions used. Compiling the pdf output also requires `pandoc` version 1.13.1 and `pdflatex`. 
+
+
+```r
+sessionInfo()
+```
+
+```
+R version 3.1.2 (2014-10-31)
+Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] methods   stats     graphics  grDevices utils     datasets  base     
+
+other attached packages:
+[1] DiagrammeR_0.3   ggplot2_1.0.0    tikzDevice_0.7.0 filehash_2.2-2  
+[5] plotROC_1.3.2    xtable_1.7-4     stringr_0.6.2    knitr_1.8       
+
+loaded via a namespace (and not attached):
+ [1] colorspace_1.2-4  digest_0.6.8      evaluate_0.5.5   
+ [4] formatR_1.0.3     grid_3.1.2        gtable_0.1.2     
+ [7] htmltools_0.2.6   htmlwidgets_0.3.2 MASS_7.3-35      
+[10] munsell_0.4.2     plyr_1.8.1        proto_0.3-10     
+[13] Rcpp_0.11.3       reshape2_1.4.1    RJSONIO_1.3-0    
+[16] rstudioapi_0.2    scales_0.2.4      tools_3.1.2      
+[19] yaml_2.1.13      
+```
 
 Bibliography 
 ===============
