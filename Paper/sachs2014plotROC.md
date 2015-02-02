@@ -173,10 +173,10 @@ plot_interactive_roc(single.rocplot)
 \end{figure}
 
 
-An interactive ROC plot can be exported by using the `export_interactive_roc` function, which returns a character string containing the necessary \proglang{HTML} and \proglang{JavaScript}. The character string can be copy-pasted into an html document, or better yet, incorporated directly into a dynamic document using \pkg{knitr} [@knitr]. In a \pkg{knitr} document, it is necessary to use the `cat` function on the results and use the chunk option `results = 'asis'` so that the interactive plot is displayed correctly. For documents that contain multiple interactive plots, it is necessary to assign each plot a unique name using the `prefix` argument of `export_interactive_roc`. This is necessary to ensure that the \proglang{JavaScript} code manipulates the correct svg elements. For examples of interactive plots and how to incorporate them into \pkg{knitr} documents, see the package vignette (`vignette("examples", package = "plotROC")`) or the web page https://sachsmc.github.io/plotROC/. The next code block shows an example \pkg{knitr} chunk that can be used in an .Rmd document to display an interactive plot. 
+An interactive ROC plot can be exported by using the `export_interactive_roc` function, which returns a character string containing the necessary \proglang{HTML} and \proglang{JavaScript}. The character string can be copy-pasted into an html document, or better yet, incorporated directly into a dynamic document using \pkg{knitr} [@knitr]. In a \pkg{knitr} document, it is necessary to use the `cat` function on the results and use the chunk options `results = 'asis'` and `fig.keep = 'none'` so that the interactive plot is displayed correctly. For documents that contain multiple interactive plots, it is necessary to assign each plot a unique name using the `prefix` argument of `export_interactive_roc`. This is necessary to ensure that the \proglang{JavaScript} code manipulates the correct svg elements. For examples of interactive plots and how to incorporate them into \pkg{knitr} documents, see the package vignette (`vignette("examples", package = "plotROC")`) or the web page https://sachsmc.github.io/plotROC/. The next code block shows an example \pkg{knitr} chunk that can be used in an .Rmd document to display an interactive plot. 
 
 
-    ```{r int-no, results = 'asis'}
+    ```{r int-no, results = 'asis', fig.keep = 'none'}
     cat(
       export_interactive_roc(single.rocplot, 
                             prefix = "a")
@@ -340,7 +340,7 @@ Here I have illustrated the usage and described the mechanics of a new \proglang
 
 ## Reproducibility Note
 
-This manuscript is completely reproducible using the source files available at http://github.com/sachsmc/plotROC-paper. The output below indicates the \proglang{R} packages and versions used. Compiling the pdf output also requires `pandoc` version 1.13.1 and `pdflatex`. 
+This manuscript is completely reproducible using the source files. The output below indicates the \proglang{R} packages and versions used. Compiling the pdf output also requires `pandoc` version 1.13.1 and `pdflatex`. 
 
 
 ```r

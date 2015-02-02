@@ -391,10 +391,12 @@ string containing the necessary \proglang{HTML} and
 html document, or better yet, incorporated directly into a dynamic
 document using \pkg{knitr} \citep{knitr}. In a \pkg{knitr} document, it
 is necessary to use the \texttt{cat} function on the results and use the
-chunk option \texttt{results = \textquotesingle{}asis\textquotesingle{}}
-so that the interactive plot is displayed correctly. For documents that
-contain multiple interactive plots, it is necessary to assign each plot
-a unique name using the \texttt{prefix} argument of
+chunk options
+\texttt{results = \textquotesingle{}asis\textquotesingle{}} and
+\texttt{fig.keep = \textquotesingle{}none\textquotesingle{}} so that the
+interactive plot is displayed correctly. For documents that contain
+multiple interactive plots, it is necessary to assign each plot a unique
+name using the \texttt{prefix} argument of
 \texttt{export\_interactive\_roc}. This is necessary to ensure that the
 \proglang{JavaScript} code manipulates the correct svg elements. For
 examples of interactive plots and how to incorporate them into
@@ -405,7 +407,7 @@ https://sachsmc.github.io/plotROC/. The next code block shows an example
 interactive plot.
 
 \begin{verbatim}
-```{r int-no, results = 'asis'}
+```{r int-no, results = 'asis', fig.keep = 'none'}
 cat(
   export_interactive_roc(single.rocplot, 
                         prefix = "a")
@@ -690,11 +692,10 @@ more informative.
 
 \subsection{Reproducibility Note}\label{reproducibility-note}
 
-This manuscript is completely reproducible using the source files
-available at http://github.com/sachsmc/plotROC-paper. The output below
-indicates the \proglang{R} packages and versions used. Compiling the pdf
-output also requires \texttt{pandoc} version 1.13.1 and
-\texttt{pdflatex}.
+This manuscript is completely reproducible using the source files. The
+output below indicates the \proglang{R} packages and versions used.
+Compiling the pdf output also requires \texttt{pandoc} version 1.13.1
+and \texttt{pdflatex}.
 
 \begin{verbatim}
 sessionInfo()
