@@ -17,6 +17,6 @@ Author: Michael C Sachs
 
 ### Details
 
-To recreate the manuscript, run `make sachs2014plotroc.pdf`. This command runs `knitr` on the .Rmd file, converts to .tex with pandoc, and then compiles the pdf using `pdflatex`. 
+To recreate the manuscript, run `make sachs2015plotroc.pdf`. This command runs `knitr` on the .Rmd file, converts to .tex with pandoc, and then compiles the pdf using `pdflatex`. 
 
 The pubmed query mentioned on page 3 can be found in the litreview folder, along with the dataset used for analysis. For questions or comments please email me at michael.sachs@nih.gov. 
