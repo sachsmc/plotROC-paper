@@ -1,0 +1,55 @@
+JSS 1530: Sachs
+
+plotROC: A Better Tool for Plotting ROC Curves
+
+---------------------------------------------------------
+For further instruction on JSS style requirements please see the JSS style manual (in particular section 2.1 Style Checklist) at http://www.jstatsoft.org/downloads/JSSstyle.zip
+
+Also see FAQ at: http://www.jstatsoft.org/style
+
+For further references please see RECENT JSS papers for detailed documentation and examples.
+---------------------------------------------------------
+
+
+From the editorial team:
+
+o We feel your submission is a code snippet rather than a full article. Please use the code snippet template with your resubmission. (See http://www.jstatsoft.org/style#files)
+Done
+
+
+o The software does reference other packages for this purpose but unfortunately does not re-use their interface/data structures. Would a qplot() method for the objects set up by "ROCR" be more elegant?
+I think no, and here's why. The ROCR package performance function returns results as a formal S4 class. This type of data structure is needlessly complex for my purposes, and it is often confusing for beginner R users. Many R users do not know what an S4 object is, let alone how to access the slots. Nevertheless, ROCR is a robust, popular package and it is fairly easy to access the needed data elements. Therefore, I added support for objects of class "performance" that contain slots "True positive fraction" and "False positive fraction". Objects of this type can be passed directly to my "ggroc" function. The relevant changes are in lines 34--44 of ggroc.R. 
+
+o The replication material is not complete. We would like to have a standalone R script which allows to reproduce all results presented in the manuscript.
+Done
+
+Manuscript style comments:
+
+Xo \section, \subsection, etc. should be in sentence style (see http://www.jstatsoft.org/style#q2), e.g., change “1.1. About ROC Curves” to “1.1. About ROC curves”. 
+
+Xo Please use “R>” as the command prompt for lines of R code.
+
+Xo For the code layout in R publications, we typically distinguish input/output using Sinput/Soutput (or equivalently CodeInput/CodeOutput). Unless there are special reasons to format it differently, the input should use the text width (up to 76 or 77 characters) and be indented by two spaces, e.g.,
+
+begin{Sinput}
+R> example_model <- lm(response ~ variable1 + variable2 + variable3, 
++    weights = w, data = mydata)
+\end{Sinput}
+
+Xo When referring to a specific figure or table in the document, capitalize the first letter of “Figure” or “Table”.
+
+Xo Capitalize “percent” as a column header in Table 1. 
+
+Xo As a reminder, please make sure that:
+	- \proglang, \pkg and \code have been used for highlighting throughout the paper (including titles and references), except where explicitly escaped.
+
+
+References:
+
+o Springer-Verlag (not: Springer)
+
+o Please make sure that all software packages are \cite{}'d properly.
+
+o All references should be in title style.
+
+o See FAQ for specific reference instructions.

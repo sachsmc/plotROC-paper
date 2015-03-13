@@ -1,4 +1,4 @@
-% Created by tikzDevice version 0.7.0 on 2015-02-02 11:41:42
+% Created by tikzDevice version 0.8.1 on 2015-03-13 14:59:22
 % !TEX encoding = UTF-8 Unicode
 \documentclass[10pt]{article}
 
@@ -14,11 +14,11 @@
 \begin{document}
 
 \begin{tikzpicture}[x=1pt,y=1pt]
-\definecolor[named]{fillColor}{rgb}{1.00,1.00,1.00}
+\definecolor{fillColor}{RGB}{255,255,255}
 \path[use as bounding box,fill=fillColor,fill opacity=0.00] (0,0) rectangle (433.62,433.62);
 \begin{scope}
 \path[clip] ( 40.84,267.61) rectangle (195.89,392.78);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (190.15,388.15) --
 	(187.72,388.15) --
@@ -222,7 +222,7 @@
 \end{scope}
 \begin{scope}
 \path[clip] (  0.00,  0.00) rectangle (433.62,433.62);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 46.58,267.61) -- (192.58,267.61);
 
@@ -284,7 +284,7 @@
 \end{scope}
 \begin{scope}
 \path[clip] (  0.00,216.81) rectangle (216.81,433.62);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.20] at (118.36,409.08) {\bfseries A};
 
@@ -294,7 +294,7 @@
 \end{scope}
 \begin{scope}
 \path[clip] (257.65,267.61) rectangle (412.70,392.78);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (406.96,388.15) --
 	(404.53,388.15) --
@@ -498,7 +498,7 @@
 \end{scope}
 \begin{scope}
 \path[clip] (  0.00,  0.00) rectangle (433.62,433.62);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (263.39,267.61) -- (409.39,267.61);
 
@@ -560,7 +560,7 @@
 \end{scope}
 \begin{scope}
 \path[clip] (216.81,216.81) rectangle (433.62,433.62);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.20] at (335.17,409.08) {\bfseries B};
 
@@ -570,7 +570,7 @@
 \end{scope}
 \begin{scope}
 \path[clip] (257.65,267.61) rectangle (412.70,392.78);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \path[draw=drawColor,line width= 0.4pt,dash pattern=on 4pt off 4pt ,line join=round,line cap=round] (406.96,388.15) --
 	(404.53,388.15) --
@@ -784,7 +784,7 @@
 \end{scope}
 \begin{scope}
 \path[clip] ( 40.84, 50.80) rectangle (195.89,175.97);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \path[draw=drawColor,line width= 0.8pt,line join=round,line cap=round] (190.15,171.34) --
 	(187.72,171.34) --
@@ -988,7 +988,7 @@
 \end{scope}
 \begin{scope}
 \path[clip] (  0.00,  0.00) rectangle (433.62,433.62);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 46.58, 50.80) -- (192.58, 50.80);
 
@@ -1050,7 +1050,7 @@
 \end{scope}
 \begin{scope}
 \path[clip] (  0.00,  0.00) rectangle (216.81,216.81);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.20] at (118.36,192.27) {\bfseries C};
 
@@ -1060,7 +1060,7 @@
 \end{scope}
 \begin{scope}
 \path[clip] ( 40.84, 50.80) rectangle (195.89,175.97);
-\definecolor[named]{drawColor}{rgb}{0.80,0.80,0.80}
+\definecolor{drawColor}{gray}{0.80}
 
 \path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 46.58, 50.80) -- ( 46.58,175.97);
 
@@ -1087,7 +1087,7 @@
 \path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 40.84,171.34) -- (195.89,171.34);
 
 \path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] ( 40.84, 50.87) -- (195.89,173.96);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \path[draw=drawColor,line width= 0.8pt,line join=round,line cap=round] (190.15,171.34) --
 	(187.72,171.34) --
@@ -1293,7 +1293,7 @@
 \end{scope}
 \begin{scope}
 \path[clip] (257.65, 50.80) rectangle (412.70,175.97);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \path[draw=drawColor,line width= 0.8pt,line join=round,line cap=round] (406.96,171.34) --
 	(404.53,171.34) --
@@ -1497,7 +1497,7 @@
 \end{scope}
 \begin{scope}
 \path[clip] (  0.00,  0.00) rectangle (433.62,433.62);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (263.39, 50.80) -- (409.39, 50.80);
 
@@ -1559,7 +1559,7 @@
 \end{scope}
 \begin{scope}
 \path[clip] (216.81,  0.00) rectangle (433.62,216.81);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.20] at (335.17,192.27) {\bfseries D};
 
@@ -1569,7 +1569,7 @@
 \end{scope}
 \begin{scope}
 \path[clip] (257.65, 50.80) rectangle (412.70,175.97);
-\definecolor[named]{drawColor}{rgb}{0.80,0.80,0.80}
+\definecolor{drawColor}{gray}{0.80}
 
 \path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (263.39, 50.80) -- (263.39,175.97);
 
@@ -1596,7 +1596,7 @@
 \path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (257.65,171.34) -- (412.70,171.34);
 
 \path[draw=drawColor,line width= 0.4pt,line join=round,line cap=round] (257.65, 50.87) -- (412.70,173.96);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \path[draw=drawColor,line width= 0.8pt,line join=round,line cap=round] (406.96,171.34) --
 	(404.53,171.34) --

@@ -1,10 +1,13 @@
 
 %.md: %.Rmd
 	Rscript -e "library(methods); library(knitr); knit('$<')" 
-
+	
+%.R: %.Rmd
+	Rscript -e "library(methods); library(knitr); knit('$<', tangle = TRUE)" 
+	
 %.tex:	%.md
-	pandoc -r markdown+simple_tables+table_captions+yaml_metadata_block -w latex -s -S --no-highlight --latex-engine=pdflatex --template=jss.latex --natbib -o $@ $<
-
+	pandoc --to latex --from markdown+raw_tex+simple_tables+table_captions+yaml_metadata_block -s -S --no-highlight --latex-engine=pdflatex --template=jss.latex --natbib -o $@ $<
+ 
 %.pdf:	%.tex
 	pdflatex $(basename $<)
 	bibtex $(basename $<)

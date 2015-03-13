@@ -1,4 +1,4 @@
-% Created by tikzDevice version 0.7.0 on 2015-02-02 11:42:06
+% Created by tikzDevice version 0.8.1 on 2015-03-13 14:59:54
 % !TEX encoding = UTF-8 Unicode
 \documentclass[10pt]{article}
 
@@ -14,21 +14,21 @@
 \begin{document}
 
 \begin{tikzpicture}[x=1pt,y=1pt]
-\definecolor[named]{fillColor}{rgb}{1.00,1.00,1.00}
+\definecolor{fillColor}{RGB}{255,255,255}
 \path[use as bounding box,fill=fillColor,fill opacity=0.00] (0,0) rectangle (433.62,433.62);
 \begin{scope}
 \path[clip] (  0.00,  0.00) rectangle (433.62,433.62);
-\definecolor[named]{drawColor}{rgb}{1.00,1.00,1.00}
-\definecolor[named]{fillColor}{rgb}{1.00,1.00,1.00}
+\definecolor{drawColor}{RGB}{255,255,255}
+\definecolor{fillColor}{RGB}{255,255,255}
 
 \path[draw=drawColor,line width= 0.6pt,line join=round,line cap=round,fill=fillColor] (  0.00,  0.00) rectangle (433.62,433.62);
 \end{scope}
 \begin{scope}
 \path[clip] ( 44.49, 34.03) rectangle (421.57,421.57);
-\definecolor[named]{fillColor}{rgb}{1.00,1.00,1.00}
+\definecolor{fillColor}{RGB}{255,255,255}
 
 \path[fill=fillColor] ( 44.49, 34.03) rectangle (421.57,421.57);
-\definecolor[named]{drawColor}{rgb}{0.98,0.98,0.98}
+\definecolor{drawColor}{gray}{0.98}
 
 \path[draw=drawColor,line width= 0.6pt,line join=round] ( 44.49, 55.14) --
 	(421.57, 55.14);
@@ -137,7 +137,7 @@
 
 \path[draw=drawColor,line width= 0.6pt,line join=round] (385.03, 34.03) --
 	(385.03,421.57);
-\definecolor[named]{drawColor}{rgb}{0.90,0.90,0.90}
+\definecolor{drawColor}{gray}{0.90}
 
 \path[draw=drawColor,line width= 0.2pt,line join=round] ( 44.49, 51.65) --
 	(421.57, 51.65);
@@ -180,7 +180,7 @@
 
 \path[draw=drawColor,line width= 0.2pt,line join=round] (388.26, 34.03) --
 	(388.26,421.57);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \path[draw=drawColor,line width= 0.6pt,line join=round] (381.53,400.47) --
 	(374.79,400.47) --
@@ -1084,17 +1084,17 @@
 \path[] ( 71.60, 51.65) circle (  0.53);
 
 \path[] ( 64.86, 51.65) circle (  0.53);
-\definecolor[named]{drawColor}{rgb}{1.00,1.00,1.00}
+\definecolor{drawColor}{RGB}{255,255,255}
 
-\path[draw=drawColor,line width= 0.6pt,line join=round,fill=fillColor] ( 44.49, 29.67) -- (419.00,433.62);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\path[draw=drawColor,line width= 0.6pt,line join=round] ( 44.49, 29.67) -- (419.00,433.62);
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \node[text=drawColor,rotate= 45.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.42] at (205.76,245.42) {M1};
 
 \node[text=drawColor,rotate= 45.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.42] at (131.64,325.91) {M2};
 
 \node[text=drawColor,rotate= 45.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.42] at (246.18,198.46) {M3};
-\definecolor[named]{fillColor}{rgb}{0.00,0.00,0.00}
+\definecolor{fillColor}{RGB}{0,0,0}
 
 \path[fill=fillColor] (381.53,400.47) circle (  2.13);
 
@@ -1335,17 +1335,16 @@
 \node[text=drawColor,anchor=base east,inner sep=0pt, outer sep=0pt, scale=  0.85] at ( 75.10, 81.97) {0.9};
 
 \node[text=drawColor,anchor=base east,inner sep=0pt, outer sep=0pt, scale=  0.85] at ( 61.63, 76.07) {1};
-\definecolor[named]{drawColor}{rgb}{0.90,0.90,0.90}
-\definecolor[named]{fillColor}{rgb}{0.90,0.90,0.90}
+\definecolor{drawColor}{gray}{0.90}
 
-\path[draw=drawColor,line width= 0.6pt,line join=round,fill=fillColor] ( 44.49, 29.67) -- (419.00,433.62);
-\definecolor[named]{drawColor}{rgb}{0.50,0.50,0.50}
+\path[draw=drawColor,line width= 0.6pt,line join=round] ( 44.49, 29.67) -- (419.00,433.62);
+\definecolor{drawColor}{gray}{0.50}
 
 \path[draw=drawColor,line width= 0.6pt,line join=round,line cap=round] ( 44.49, 34.03) rectangle (421.57,421.57);
 \end{scope}
 \begin{scope}
 \path[clip] (  0.00,  0.00) rectangle (433.62,433.62);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \node[text=drawColor,anchor=base east,inner sep=0pt, outer sep=0pt, scale=  0.96] at ( 37.37, 48.34) {0.00};
 
@@ -1363,7 +1362,7 @@
 \end{scope}
 \begin{scope}
 \path[clip] (  0.00,  0.00) rectangle (433.62,433.62);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \path[draw=drawColor,line width= 0.6pt,line join=round] ( 40.22, 51.65) --
 	( 44.49, 51.65);
@@ -1388,7 +1387,7 @@
 \end{scope}
 \begin{scope}
 \path[clip] (  0.00,  0.00) rectangle (433.62,433.62);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \path[draw=drawColor,line width= 0.6pt,line join=round] ( 64.86, 29.77) --
 	( 64.86, 34.03);
@@ -1413,7 +1412,7 @@
 \end{scope}
 \begin{scope}
 \path[clip] (  0.00,  0.00) rectangle (433.62,433.62);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  0.96] at ( 64.86, 20.31) {0.00};
 
@@ -1431,13 +1430,13 @@
 \end{scope}
 \begin{scope}
 \path[clip] (  0.00,  0.00) rectangle (433.62,433.62);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \node[text=drawColor,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.20] at (233.03,  9.03) {False positive fraction};
 \end{scope}
 \begin{scope}
 \path[clip] (  0.00,  0.00) rectangle (433.62,433.62);
-\definecolor[named]{drawColor}{rgb}{0.00,0.00,0.00}
+\definecolor{drawColor}{RGB}{0,0,0}
 
 \node[text=drawColor,rotate= 90.00,anchor=base,inner sep=0pt, outer sep=0pt, scale=  1.20] at ( 17.30,227.80) {True positive fraction};
 \end{scope}

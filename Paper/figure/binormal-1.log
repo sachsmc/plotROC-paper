@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  2 FEB 2015 11:42
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  13 MAR 2015 15:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -418,7 +418,7 @@ e
 Preview: Fontsize 10pt
 Preview: PDFoutput 1
 
-Overfull \hbox (88.62pt too wide) in paragraph at lines 1277--1277
+Overfull \hbox (88.62pt too wide) in paragraph at lines 1276--1276
 [][] 
  []
 
@@ -429,14 +429,14 @@ Non-PDF special ignored!] (./binormal-1.aux) )
 Here is how much of TeX's memory you used:
  10533 strings out of 493315
  203192 string characters out of 6137904
- 256027 words of memory out of 5000000
+ 255480 words of memory out of 5000000
  13804 multiletter control sequences out of 15000+600000
  3640 words of font info for 14 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 56i,7n,55p,401b,590s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 56i,7n,55p,401b,586s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2013/texmf-di
 st/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on binormal-1.pdf (1 page, 22614 bytes).
+Output written on binormal-1.pdf (1 page, 22594 bytes).
 PDF statistics:
  15 PDF objects out of 1000 (max. 8388607)
  10 compressed objects within 1 object stream
