@@ -1,0 +1,23 @@
+Michael C. Sachs - plotROC: A Better Tool for Plotting ROC Curves
+
+The paper about plotROC describes a new R package for plotting receiver operating characteristic curves (ROC) curves for the evaluation of binary classifiers.
+
+The paper is well written and gives background on ROC curves, motivation for improving ROC curves based on a literature survey, as well as code examples on how to use plotROC.
+
+The greatest strengths of the new package are: 
+- Clean and nice graphics (based on ggplot2)
+- The attempt to provide sensible defaults (e.g. for fontsize, axis tickmarks, etc.)
+- Options for interactivity, i.e. providing a web-interface using shiny. This is intended to make high quality ROC analyses accessible to non-technical users
+
+However, the package falls short of the goal proclaimed in the title of providing a "better tool for plotting ROC curves". While the strengths above deserve credit, other established tools (e.g. the referenced packages pROC and ROCR) provide several other features that are not covered in the current package (e.g. other performance measures, AUC, partial AUC, averaging of curves, aggregating curves across bootstraps or cross-validation folds, and confidence limits and regions on many of those measures).
+
+Also the paper and package suffer from a number of ambiguities and inaccuracies (either technical or in the description):
+- The extreme point TPF/TPR=1/1 is not included in the output of the calculate_roc function. This could lead to problems when plotting curves that don't span the full 0/0 to 1/1 space and also when computing AUCs.
+- plotROC seems to implictly define that samples ">" the threshold are positive, samples "<=" the threshold are negative. In this it differs from e.g. Fawcett "An introduction to ROC analysis" or other software (e.g. the ROCR package) that define samples ">=" the threshold as a positive prediction.
+- It is not obvious how plotROC handles ties (i.e. samples with identical numerical measurements)
+- The paper defines "good outcome" and "bad outcome" in Section 1.1. These definitions seem to ignore half of the confusion matrix (i.e. ignoring true and false negatives).
+- In "Help and Documentation" of the webpage, the confusion matrix and the definitions seem to be copied from Wikipedia. Credits and reference are needed.
+- The website states "confidence level = 0.05". Should this be "significance level" instead?
+
+Overall, the paper and package provide some new noteworthy ideas to ROC analysis with the attempt to make high quality analyses more accessible to non-technical experts. The current tool does not have the maturity and comprehensiveness of other tools - therefore the users will be left with the choice between alternative tools, each with their own strengths and weaknesses.
+
