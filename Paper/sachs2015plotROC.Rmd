@@ -11,7 +11,7 @@ address:
 - Bethesda, MD 20892
 - "telephone: 240-276-7888"
 email: michael.sachs@nih.gov
-abstract: 'Plots of the receiver operating characteristic (ROC) curve are ubiquitous in medical research. Designed to simultaneously display the operating characteristics at every possible value of a continuous diagnostic test, ROC curves are used in oncology to evaluate screening, diagnostic, prognostic and predictive biomarkers. I reviewed a sample of ROC curve plots from the major oncology journals in order to assess current trends in usage and design elements. My review suggests that ROC curve plots are often ineffective as statistical charts and that poor design obscures the relevant information the chart is intended to display. I describe my new \proglang{R} package that was created to address the shortcomings of existing tools. The package has functions to create informative ROC curve plots, with sensible defaults, for use in print or as an interactive web-based plot. A web application was developed to reach a broader audience of scientists who do not use \proglang{R}.'
+abstract: 'Plots of the receiver operating characteristic (ROC) curve are ubiquitous in medical research. Designed to simultaneously display the operating characteristics at every possible value of a continuous diagnostic test, ROC curves are used in oncology to evaluate screening, diagnostic, prognostic and predictive biomarkers. I reviewed a sample of ROC curve plots from the major oncology journals in order to assess current trends in usage and design elements. My review suggests that ROC curve plots are often ineffective as statistical charts and that poor design obscures the relevant information the chart is intended to display. I describe my new \proglang{R} package that was created to address the shortcomings of existing tools. The package has functions to create informative ROC curve plots, with sensible defaults and a simple interface, for use in print or as an interactive web-based plot. A web application was developed to reach a broader audience of scientists who do not use \proglang{R}.'
 keywords: ROC curves; graphics; interactive; plots
 bibliography: plotroc
 ...
@@ -39,23 +39,38 @@ render_sweave()
 
 ## About ROC curves
 
-The Receiver Operating Characteristic (ROC) curve is used to assess the accuracy of a continuous measurement for predicting a binary outcome. In medicine, ROC curves have a long history of use for evaluating diagnostic tests in radiology and general diagnostics. ROC curves have also been used for decades in signal detection theory. 
+The Receiver Operating Characteristic (ROC) curve is used to assess the accuracy of a continuous measurement for predicting a binary outcome. In medicine, ROC curves have a long history of use for evaluating diagnostic tests in radiology and general diagnostics. ROC curves originated in the field of signal detection theory . 
 
-The accuracy of a diagnostic test can be evaluated by considering two possible types of errors: false positives, and false negatives. For a continuous measurement that I denote as $M$, convention dictates that a test positive is defined as $M$ exceeding some fixed threshold $c$: $M > c$. In reference to the binary outcome that I denote as $D$, a good outcome of the test is when the test is positive for an individual who truly has a disease: $D = 1$. A bad outcome is when the test is positive for an individual who does not have the disease $D = 0$. 
+For a continuous measurement that I denote as $M$, convention dictates that a test positive is defined as $M$ equalling or exceeding some fixed threshold $c$: $M \geq c$. The goal of ROC analysis is to evaluate the classification accuracy of $M$ in reference to the binary outcome $D$, which takes possible values $0$ (negative) or $1$ (positive). It is implicitly assumed that the subpopulation having $D = 1$ tends to have larger values of $M$ compared to the subpopulation with $D = 0$. The classification accuracy of $M$ can be evaluated by considering the confusion matrix (Table \ref{confus}). The confusion matrix cross-classifies the predicted outcome $M \geq c$ versus the true outcome $D$. The four cells of the matrix correspond to the possible classification outcomes: a true positive, a false positive, a true negative, and a false negative. ROC analysis assesses the trade-offs between the test's fraction of true positives versus the false positives. 
+
+\begin{table}
+\begin{tabular}{l|l|c|c|c}
+\multicolumn{2}{c}{}&\multicolumn{2}{c}{$D$}&\\
+\cline{3-4}
+\multicolumn{2}{c|}{}&1&0&\multicolumn{1}{c}{Total}\\
+\cline{2-4}
+\multirow{2}{*}{$M$}& $M \geq c$ & true positive & false positive & test positive\\
+\cline{2-4}
+& $M < c$ & false negative & true negative & test negative\\
+\cline{2-4}
+\multicolumn{1}{c}{} & \multicolumn{1}{c}{Total} & \multicolumn{1}{c}{disease positive} & \multicolumn{1}{c}{disease negative} & \multicolumn{1}{c}{total}\\
+\end{tabular}
+\caption{\label{confus} Confusion matrix illustrating the possible classification outcomes of a continuous test $M$ with threshold $c$ versus the true outcome $D$. }
+\end{table}
 
 Formally, for a fixed cutoff $c$, the true positive fraction is the probability of a test positive in the diseased population:
 
-$$ TPF(c) = P\{ M > c | D = 1 \} $$
+$$ TPF(c) = P\{ M \geq c | D = 1 \} $$
 
 and the false positive fraction is the probability of a test positive in the healthy population:
 
-$$ FPF(c) = P\{ M > c | D = 0 \} $$
+$$ FPF(c) = P\{ M \geq c | D = 0 \} $$
 
-Since the cutoff $c$ is not fixed in advance, I can plot the TPF against the FPF for all possible values of $c$. This is exactly what the ROC curve is, a plot of $FPF(c)$ on the $x$ axis and $TPF(c)$ along the $y$ axis as $c$ varies. A useless test that is not informative at all in regards to the disease status has $TPF(c) = FPF(c)$ for all $c$. The ROC plot of a useless test is thus the diagonal line. A perfect test that is completely informative about disease status has $TPF(c) = 1$ and $FPF(c) = 0$ for all $c$. 
+Since the cutoff $c$ is not fixed in advance, one can plot the TPF against the FPF for all possible values of $c$. This is exactly what the ROC curve is, a plot of $FPF(c)$ on the $x$ axis and $TPF(c)$ along the $y$ axis as $c$ varies. A useless test that is not informative at all in regards to the disease status has $TPF(c) = FPF(c)$ for all $c$. The ROC plot of a useless test is thus the diagonal line. A perfect test that is completely informative about disease status has $TPF(c) = 1$ and $FPF(c) = 0$ for at least one value $c$. If the assumption that support of $M | D = 1$ is greater than that of $M | D = 0$ holds, then the ROC curve will lie in the upper left quadrant above the diagonal line, however this may not be the case in a particular sample. 
 
 Given a sample of test and disease status pairs, $(M_1, D_1), \ldots, (M_n, D_n)$, I can estimate the ROC curve by computing proportions in the diseased and healthy subgroups separately. Specifically, given a fixed cutoff $c$, an estimate of the $TPF(c)$ is
 
-$$ \widehat{TPF(c)} = \frac{\sum_{i = 1}^n 1\{M_i > c\} \cdot 1\{D_i = 1\}}{\sum_{i=1}^n 1\{D_i = 1\}}, $$ 
+$$ \widehat{TPF(c)} = \frac{\sum_{i = 1}^n 1\{M_i \geq c\} \cdot 1\{D_i = 1\}}{\sum_{i=1}^n 1\{D_i = 1\}}, $$ 
 
 where $1\{\cdot\}$ is the indicator function. An estimate for $FPF(c)$ is given by a similar expression with $D_i = 1$ replaced with $D_i = 0$. Calculating these proportions for $c$ equal to each unique value of the observed $M_i$ yields what is known as the empirical ROC curve estimate. The empirical estimate is a step function. Other methods exist to estimate the ROC curve, such as the binormal parametric estimate which can be used to get a smooth curve. There are also extensions that allow for estimation with time-to-event outcomes subject to censoring. For a more thorough reference on the methods and theory surrounding ROC curves, I refer interested readers to @pepe2003statistical.
 
