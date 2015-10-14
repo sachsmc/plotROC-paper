@@ -88,9 +88,9 @@ In the medical literature, FPF and TPF are usually referred to in terms of the j
 
 The ROC curve plot is, at the most basic level, a line graph. Therefore, once the appropriate statistics are estimated, existing plotting functions can be used to create an ROC curve plot. Viewers can identify ROC plots through context, by observing the shape of the line, and through the addition of axis labels, titles, legends, and so on. In my review of the oncology literature, I observed plots with the distinctive characteristics of the plotting functions from Microsoft Excel [@excel], \proglang{SAS} [@sas], \proglang{SPSS} [@spss], and the base \proglang{R} plotting functions [@arr]. 
 
-There are several \proglang{R} packages related to ROC curve estimation that contain dedicated plotting functions. The \pkg{ROCR} package [@rocr] plots the FPF _versus_ TPF, as usual, and then takes the interesting approach of encoding the cutoff values as a separate color scale along the ROC curve itself. A legend for the color scale is placed along the vertical axis on the right of the plotting region. Due to the popularity of \pkg{ROCR}, my package supports the performance objects as returned by \pkg{ROCR}. The \pkg{pROC} package [@pROC] is mainly focused on estimating confidence intervals and regions for restricted ranges of the ROC curve. The plotting methods therein use the base \proglang{R} plotting functions to create nice displays of the curves along with shaded confidence regions. My \pkg{plotROC} package uses the \pkg{ggplot2} [@ggplot2] plotting library to create clear, informative ROC plots, with interactive features for use on the web, and sensible defaults for use in print. 
+There are several \proglang{R} packages related to ROC curve estimation that contain dedicated plotting functions. The \pkg{ROCR} package [@rocr] plots the FPF _versus_ TPF, as usual, and then takes the interesting approach of encoding the cutoff values as a separate color scale along the ROC curve itself. A legend for the color scale is placed along the vertical axis on the right of the plotting region. Due to the popularity of \pkg{ROCR}, my package provides a convenience function to plot ROC curves from the performance objects as returned by \pkg{ROCR}. The \pkg{pROC} package [@pROC] provides an option for plotting cutoff labels (`print.thres = TREU`) and is mainly focused on estimating confidence intervals and regions for restricted ranges of the ROC curve. The plotting methods therein use the base \proglang{R} plotting functions to create nice displays of the curves along with shaded confidence regions. My \pkg{plotROC} package uses the \pkg{ggplot2} [@ggplot2] plotting library to create clear, informative ROC plots, with interactive features for use on the web, and sensible defaults for use in print. 
 
-## Motivation
+## Motivation and Literature Review
 
 Anyone giving a cursory look at any of the major medical journals is likely to find at least one ROC curve plot. I sought to assess the usage of ROC curve plots and to evaluate the design choices made in the current oncology literature by conducting a small literature review. I searched Pubmed for  clinical trials or observational studies in humans reported in major oncology journals for the past 10 years for the terms "ROC Curve" OR "ROC Analysis" OR "Receiver operating characteristic curve". The search was conducted on October 8, 2014 and returned 54 papers. From those papers, 47 images were extracted and reviewed. The exact specifications for the Pubmed query are available in the manuscript source files. 
 
@@ -175,12 +175,15 @@ lines(TPF ~ FPF, data = R2, type = 's', lty = 2)
 legend("bottomright", legend = c("Test A: AUC = 0.81", "Test B: AUC = 0.64"), lty = 1:2, cex = .75)
 
 # C
-plot(TPF ~ FPF, data = R1, type = 's', lwd  = 2, xlab = "False positive fraction", ylab = "True positive fraction", main = "C")
+plot(TPF ~ FPF, data = R1, type = 's', lwd  = 2, xlab = "False positive fraction", ylab = "True positive fraction", main = "C", xlim = c(-.05, 1))
 abline(v = seq(0, 1, by = .2), lwd = 1, col = "grey80")
 abline(h = seq(0, 1, by = .2), lwd = 1, col = "grey80")
 abline(0, 1, col = "grey80")
 lines(TPF ~ FPF, data = R1, type = 's', lwd = 2)
-text(.2, .8, "Test A")
+text(.35, .6, "Test A")
+dexc <- seq(1, length(R1$FPF), length.out = 7)[-c(1, 7)]
+text(R1$FPF[dexc] - .075, R1$TPF[dexc] + .05, round(R1$c[dexc], 1))
+lines(TPF ~ FPF, data = R1[dexc, ], type = 'p', pch = 20)
 
 # D
 plot(TPF ~ FPF, data = R1, type = 's', lwd  = 2, xlab = "False positive fraction", ylab = "True positive fraction", main = "D")
@@ -192,6 +195,8 @@ lines(TPF ~ FPF, data = R2, type = 's', lwd = 2)
 text(.2, .8, "A")
 text(.3, .4, "B")
 ```
+
+The vast majority of the figures that were reviewed looked more like those in panels A and B than those in C and D. While plots like this do technically display the trade-offs between false- and true-positives, they minimize the amount of useful information that can be displayed in the space needed to plot an ROC curve. The plots created by \pkg{plotROC} attempt to increase the amount of information displayed in ROC charts that would otherwise be mostly white space. This is useful not only for print media, where space is limited, but also during data analysis. The analyst can quickly and easily view information that would otherwise be obscured by standard plotting software. The interactive features take this one step further, enhancing the plots with high density and easily accessible supplementary information. 
 
 # Usage of the package
 
