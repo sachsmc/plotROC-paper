@@ -29,7 +29,7 @@ knit_hooks$set(plot = function(x, options) {
 
 options(prompt = "R> ")
 
-opts_chunk$set(dev="tikz", prompt = TRUE)
+opts_chunk$set(dev="tikz", prompt = TRUE, sanitize = TRUE)
 
 render_sweave()
 
@@ -44,16 +44,16 @@ The Receiver Operating Characteristic (ROC) curve is used to assess the accuracy
 For a continuous measurement that I denote as $M$, convention dictates that a test positive is defined as $M$ equalling or exceeding some fixed threshold $c$: $M \geq c$. The goal of ROC analysis is to evaluate the classification accuracy of $M$ in reference to the binary outcome $D$, which takes possible values $0$ (negative) or $1$ (positive). It is implicitly assumed that the subpopulation having $D = 1$ tends to have larger values of $M$ compared to the subpopulation with $D = 0$. The classification accuracy of $M$ can be evaluated by considering the confusion matrix (Table \ref{confus}). The confusion matrix cross-classifies the predicted outcome $M \geq c$ versus the true outcome $D$. The four cells of the matrix correspond to the possible classification outcomes: a true positive, a false positive, a true negative, and a false negative. ROC analysis assesses the trade-offs between the test's fraction of true positives versus the false positives. 
 
 \begin{table}
-\begin{tabular}{l|l|c|c|c}
-\multicolumn{2}{c}{}&\multicolumn{2}{c}{$D$}&\\
-\cline{3-4}
-\multicolumn{2}{c|}{}&1&0&\multicolumn{1}{c}{Total}\\
-\cline{2-4}
-\multirow{2}{*}{$M$}& $M \geq c$ & true positive & false positive & test positive\\
-\cline{2-4}
-& $M < c$ & false negative & true negative & test negative\\
-\cline{2-4}
-\multicolumn{1}{c}{} & \multicolumn{1}{c}{Total} & \multicolumn{1}{c}{disease positive} & \multicolumn{1}{c}{disease negative} & \multicolumn{1}{c}{total}\\
+\begin{tabular}{l|c|c|c}
+\multicolumn{1}{c}{}&\multicolumn{2}{c}{$D$}&\\
+\cline{2-3}
+\multicolumn{1}{c|}{}&1&0&\multicolumn{1}{c}{Total}\\
+\cline{2-3}
+ $M \geq c$ & true positive & false positive & test positive\\
+\cline{2-3}
+ $M < c$ & false negative & true negative & test negative\\
+\cline{2-3}
+\multicolumn{1}{c}{Total} & \multicolumn{1}{c}{disease positive} & \multicolumn{1}{c}{disease negative} & \multicolumn{1}{c}{}\\
 \end{tabular}
 \caption{\label{confus} Confusion matrix illustrating the possible classification outcomes of a continuous test $M$ with threshold $c$ versus the true outcome $D$. }
 \end{table}
@@ -88,7 +88,7 @@ In the medical literature, FPF and TPF are usually referred to in terms of the j
 
 The ROC curve plot is, at the most basic level, a line graph. Therefore, once the appropriate statistics are estimated, existing plotting functions can be used to create an ROC curve plot. Viewers can identify ROC plots through context, by observing the shape of the line, and through the addition of axis labels, titles, legends, and so on. In my review of the oncology literature, I observed plots with the distinctive characteristics of the plotting functions from Microsoft Excel [@excel], \proglang{SAS} [@sas], \proglang{SPSS} [@spss], and the base \proglang{R} plotting functions [@arr]. 
 
-There are several \proglang{R} packages related to ROC curve estimation that contain dedicated plotting functions. The \pkg{ROCR} package [@rocr] plots the FPF _versus_ TPF, as usual, and then takes the interesting approach of encoding the cutoff values as a separate color scale along the ROC curve itself. A legend for the color scale is placed along the vertical axis on the right of the plotting region. The \pkg{pROC} package [@pROC] provides an option for plotting cutoff labels (`print.thres = TREU`) and is mainly focused on estimating confidence intervals and regions for restricted ranges of the ROC curve. The plotting methods therein use the base \proglang{R} plotting functions to create nice displays of the curves along with shaded confidence regions. My \pkg{plotROC} package uses the \pkg{ggplot2} [@ggplot2] plotting library to create clear, informative ROC plots, with interactive features for use on the web, and sensible defaults for use in print. 
+There are several \proglang{R} packages related to ROC curve estimation that contain dedicated plotting functions. The \pkg{ROCR} package [@rocr] plots the FPF _versus_ TPF, as usual, and then takes the interesting approach of encoding the cutoff values as a separate color scale along the ROC curve itself. A legend for the color scale is placed along the vertical axis on the right of the plotting region. The \pkg{pROC} package [@pROC] provides an option for plotting cutoff labels (\code{print.thres = TRUE}) and is mainly focused on estimating confidence intervals and regions for restricted ranges of the ROC curve. The plotting methods therein use the base \proglang{R} plotting functions to create nice displays of the curves along with shaded confidence regions. My \pkg{plotROC} package uses the \pkg{ggplot2} [@ggplot2] plotting library to create clear, informative ROC plots, with interactive features for use on the web, and sensible defaults for use in print. 
 
 ## Motivation and Literature Review
 
@@ -154,7 +154,7 @@ The small minority of the figures make any attempt to indicate the values of the
 
 The panels of Figure \ref{figure1} illustrate the most common styles of ROC curve plots, and the associated design elements. I favor the use of gridlines and a diagonal reference line to facilitate accurate readings off of the axes. Direct labels are preferred over legends because they omit the additional cognitive step of matching line types or colors to labels. My \pkg{plotROC} package additionally provides plotting of cutoff values, which are displayed interactively with the web-based output option, and direct labels for print use. Exact confidence regions for points on the ROC curve are optionally calculated and displayed. Additionally, I use axis scales adjusted to be denser near the margins 0 and 1. In medical applications, it is often necessary to have a very low FPR (less than 10%, for instance), therefore the smaller scales are useful for accurately determining values near the margins. The next section details the usage of the \pkg{plotROC} \proglang{R} package and these features. 
 
-```{r figure1, fig.width = 6, fig.height = 6, echo = FALSE, fig.cap = "Illustration of design choices in plotting ROC curves. Panel A shows a sparse ROC curve, with no design additions inside the plotting region. The plot results in more white space than anything else. It is difficult to accurately determine values without reference lines. Panel B shows a plot comparing 2 curves, with different line types and a legend. AUCs are also given in the legend. Panels C and D add gridlines, diagonal reference lines, and direct labels. \\label{figure1}"}
+```{r figure1, fig.width = 6, fig.height = 6, message = FALSE, echo = FALSE, fig.cap = "Illustration of design choices in plotting ROC curves. Panel A shows a sparse ROC curve, with no design additions inside the plotting region. The plot results in more white space than anything else. It is difficult to accurately determine values without reference lines. Panel B shows a plot comparing 2 curves, with different line types and a legend. AUCs are also given in the legend. Panels C and D add gridlines, diagonal reference lines, and direct labels. \\label{figure1}"}
 library(plotROC)
 
 set.seed(520)
@@ -260,7 +260,7 @@ It is common to compute confidence regions for points on the ROC curve using the
 
 This is implemented in the \code{stat_rocci} and displayed as a \code{geom_rocci} layer. These both require the same aesthetics as the ROC geom, \code{d} for disease status and \code{m} for marker. By default, a set of 3 evenly spaced points along the curve are chosed to display confidence regions. Points corresponding to the confidence regions are distiguished from the others with a different symbol. You can select points by passing a vector of values in the range of \code{m} to the \code{ci.at} argument. By default, the significance level $\alpha$ is set to 0.05, this can be changed using the \code{sig.level} option. An example is shown in Figure \ref{ciex}.
 
-```{r test-a-ci, eval = 1, fig.cap = "Illustration of \\pkg{plotROC} with exact confidence regions \\label{ciex}."}
+```{r test-a-ci, eval = 1, fig.cap = "Illustration of \\pkg{plotROC} with exact confidence regions. \\label{ciex}"}
 basicplot + geom_rocci()
 
 basicplot + geom_rocci(sig.level = .01)
@@ -374,15 +374,20 @@ Interactive versions of the plots with grouping and faceting are fully supported
 
 \pkg{plotROC} uses the \pkg{ggplot2} package to create the objects to be plotted. Therefore, themes and annotations can be added in the usual \pkg{ggplot2} way. A \code{plot_journal_roc} figure with a new theme, title, axis label, and AUC annotation is shown in Figure \ref{annotate}. \pkg{plotROC} provides the convenience function \code{calc_auc} that takes a ggplot object that has an Roc layer, extracts the data, and calculates the AUC. 
 
-```{r print2, warning = FALSE, message = FALSE, fig.width = 6, fig.height = 6, fig.cap = "Using \\pkg{ggplot2} themes and annotations with \\pkg{plotROC} objects. \\label{annotate}"}
-basicplot + 
-  style_roc(theme = theme_grey) +
+```{r print2s, warning = FALSE, message = FALSE}
+annotate <- basicplot + style_roc(theme = theme_grey) +
   theme(axis.text = element_text(colour = "blue")) +
   ggtitle("Themes and annotations") + 
   annotate("text", x = .75, y = .25, 
-           label = paste("AUC =", round(calc_auc(basicplot)$AUC, 2))) +
+           label = paste("AUC =", round(calc_auc(basicplot)["AUC"], 2))) +
   scale_x_continuous("1 - Specificity", breaks = seq(0, 1, by = .1))
 ```
+
+```{r print2, echo = FALSE, fig.width = 6, fig.height = 6, fig.cap = "Using \\pkg{ggplot2} themes and annotations with \\pkg{plotROC} objects. \\label{annotate}"}
+annotate
+```
+
+The results are compatible with all other \pkg{ggplot2} layers and functions, and interactive versions are supported as long as there is an Roc layer present. 
 
 ### Other estimation methods
 
@@ -443,34 +448,7 @@ survplot <- ggplot(sroclong, aes(x = FPF, y = TPF, label = c, color = time)) +
 
 \pkg{plotROC} makes interactive plots by first converting the \code{ggplot} object into a scalable vector graphic (svg) object with the \code{gridSVG::grid.export} function. This function maps each element of the plot to a corresponding element of the svg markup language. I keep track of the names of the points and labels elements so that I can add interactivity using \pkg{d3.js} and \proglang{JavaScript}. The main interactive feature I wanted was to be able to display the cutoff labels at the points on the ROC curve closest to the mouse cursor. 
 
-There are many ways to solve this with \pkg{d3.js}, but I decided to use Voronoi polygons to map the cursor location to the nearest point on the ROC curve. The idea is that for the set of cutoff points along the ROC curve, the \code{d3.geom.voronoi} function chain computes a set of polygons overlaying the plotting region such that the area of each polygon contains the region of the plot closest to it's corresponding cutoff point. Hover events are bound to the polygons so that when the mouse cursor moves around the plotting region, the closest point on the ROC curve is made visible. Similarly, click events are bound to the polygons so that the appropriate confidence region is made visible upon clicking. The svg code and all necessary \proglang{JavaScript} code is returned in the character string provided by \code{export_interactive_roc}. Figure \ref{flow} outlines the \pkg{plotROC} process. 
-
-```{r diagram, include = FALSE}
-library(DiagrammeR)
-
-DiagrammeR("
-  graph LR;
-    A[ROC Estimate]-->|ggroc|B(ggplot object);
-    B-->|plot_journal_roc|C(Static Plot);
-    B-->|grid.export|D(svg object);
-    D-->E(Interactive Plot);
-    F(d3.js functions)-->E;
-    G(css styles)-->E;
-  
-  style A fill:#DCEBE3
-  style C fill:#A2EB86
-  style E fill:#A2EB86
-")
-
-## export as pdf
-
-```
-
-\begin{figure}[ht]
-\centering
-\includegraphics{figure/diagram.pdf}
-\caption{Flowchart illustrating the approach that \pkg{plotROC} takes to generate either static plots for print or interactive plots for web-use. \label{flow}}
-\end{figure}
+There are many ways to solve this with \pkg{d3.js}, but I decided to use Voronoi polygons to map the cursor location to the nearest point on the ROC curve. The idea is that for the set of cutoff points along the ROC curve, the \code{d3.geom.voronoi} function chain computes a set of polygons overlaying the plotting region such that the area of each polygon contains the region of the plot closest to it's corresponding cutoff point. Hover events are bound to the polygons so that when the mouse cursor moves around the plotting region, the closest point on the ROC curve is made visible. Similarly, click events are bound to the polygons so that the appropriate confidence region is made visible upon clicking. The svg code and all necessary \proglang{JavaScript} code is returned in the character string provided by \code{export_interactive_roc}. 
 
 This approach is similar to what is done in the \pkg{gridSVG} \code{grid.animate} function, which uses the svg \code{<animate />} tags. However, the available features were not sufficient for my needs, which is why I used \pkg{d3.js}. There are several other \proglang{R} packages that aim to create interactive figures. The authors of \pkg{animint} [@animint] created an extensive \proglang{JavaScript} library that creates plots in a similar way as \pkg{ggplot2}. A set of interactive features can be added to plots using \pkg{d3.js}. \pkg{ggvis} [@ggvis], \pkg{rCharts} [@rcharts], and the more recently released \pkg{htmlwidgets} [@htmlwidgets] all leverage existing charting libraries written in \proglang{JavaScript}. \pkg{qtlcharts} [@qtlcharts] uses a set of custom \proglang{JavaScript} and \pkg{d3.js} functions to visualize data from genetic experiments. Their general approach is to manipulate the data and create options in \proglang{R}, and then let the charting libraries or functions handle the rendering and interactivity. \pkg{plotROC} lets \proglang{R} do the rendering, allowing the figures to be consistent across print and web-based media, and retaining the distinctive \proglang{R} style. This also allows users to manipulate the figures directly in \proglang{R} to suit their needs, using tools that are more accessible and familiar to most \proglang{R} users. 
 
