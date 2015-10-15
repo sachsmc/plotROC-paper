@@ -79,23 +79,23 @@ The Receiver Operating Characteristic (ROC) curve is used to assess the
 accuracy of a continuous measurement for predicting a binary outcome. In
 medicine, ROC curves have a long history of use for evaluating
 diagnostic tests in radiology and general diagnostics. ROC curves
-originated in the field of signal detection theory .
+originated in the field of signal detection theory.
 
 For a continuous measurement that I denote as \(M\), convention dictates
 that a test positive is defined as \(M\) equalling or exceeding some
-fixed threshold \(c\): \(M \geq c\). The goal of ROC analysis is to
-evaluate the classification accuracy of \(M\) in reference to the binary
-outcome \(D\), which takes possible values \(0\) (negative) or \(1\)
-(positive). It is implicitly assumed that the subpopulation having
-\(D = 1\) tends to have larger values of \(M\) compared to the
-subpopulation with \(D = 0\). The classification accuracy of \(M\) can
-be evaluated by considering the confusion matrix (Table \ref{confus}).
-The confusion matrix cross-classifies the predicted outcome \(M \geq c\)
-versus the true outcome \(D\). The four cells of the matrix correspond
-to the possible classification outcomes: a true positive, a false
-positive, a true negative, and a false negative. ROC analysis assesses
-the trade-offs between the test's fraction of true positives versus the
-false positives.
+threshold \(c\): \(M \geq c\). The goal of ROC analysis is to evaluate
+the classification accuracy of \(M\) in reference to the binary outcome
+\(D\), which takes possible values \(0\) (negative) or \(1\) (positive).
+It is implicitly assumed that the subpopulation having \(D = 1\) tends
+to have larger values of \(M\) compared to the subpopulation with
+\(D = 0\). The classification accuracy of \(M\) can be evaluated by
+considering the confusion matrix (Table \ref{confus}). The confusion
+matrix cross-classifies the predicted outcome \(M \geq c\) versus the
+true outcome \(D\). The four cells of the matrix correspond to the
+possible classification outcomes: a true positive, a false positive, a
+true negative, and a false negative. ROC analysis assesses the
+trade-offs between the test's fraction of true positives versus the
+false positives as \(c\) varies over the range of \(M\).
 
 \begin{table}
 \begin{tabular}{l|c|c|c}
@@ -120,7 +120,7 @@ probability of a test positive in the diseased population:
 and the false positive fraction is the probability of a test positive in
 the healthy population:
 
-\[ FPF(c) = P\{ M \geq c | D = 0 \} \]
+\[ FPF(c) = P\{ M \geq c | D = 0 \}. \]
 
 Since the cutoff \(c\) is not fixed in advance, one can plot the TPF
 against the FPF for all possible values of \(c\). This is exactly what
@@ -139,12 +139,14 @@ Given a sample of test and disease status pairs,
 \((M_1, D_1), \ldots, (M_n, D_n)\), I can estimate the ROC curve by
 computing proportions in the diseased and healthy subgroups separately.
 Specifically, given a fixed cutoff \(c\), an estimate of the \(TPF(c)\)
-is
+is the proportion of test positives among the diseased subgroup:
 
 \[ \widehat{TPF(c)} = \frac{\sum_{i = 1}^n 1\{M_i \geq c\} \cdot 1\{D_i = 1\}}{\sum_{i=1}^n 1\{D_i = 1\}}, \]
 
-where \(1\{\cdot\}\) is the indicator function. An estimate for
-\(FPF(c)\) is given by a similar expression with \(D_i = 1\) replaced
+where \(1\{\cdot\}\) is the indicator function that equals 1 when the
+condition inside the parentheses is true and 0 otherwise. An estimate
+for \(FPF(c)\) is the proportion of test positives among the healthy
+subgroup and is given by a similar expression with \(D_i = 1\) replaced
 with \(D_i = 0\). Calculating these proportions for \(c\) equal to each
 unique value of the observed \(M_i\) yields what is known as the
 empirical ROC curve estimate. The empirical estimate is a step function.
@@ -225,8 +227,7 @@ confidence regions. My \pkg{plotROC} package uses the \pkg{ggplot2}
 with interactive features for use on the web, and sensible defaults for
 use in print.
 
-\subsection{Motivation and Literature
-Review}\label{motivation-and-literature-review}
+\subsection{Literature Review}\label{literature-review}
 
 Anyone giving a cursory look at any of the major medical journals is
 likely to find at least one ROC curve plot. I sought to assess the usage
@@ -235,20 +236,19 @@ current oncology literature by conducting a small literature review. I
 searched Pubmed for clinical trials or observational studies in humans
 reported in major oncology journals for the past 10 years for the terms
 ``ROC Curve'' OR ``ROC Analysis'' OR ``Receiver operating characteristic
-curve''. The search was conducted on October 8, 2014 and returned 54
-papers. From those papers, 47 images were extracted and reviewed. The
-exact specifications for the Pubmed query are available in the
-manuscript source files.
+curve''. I conducted the search on October 8, 2014 and it returned 54
+papers. From those papers, I extracted and reviewed 47 images. The exact
+specifications for the Pubmed query are available in the manuscript
+source files.
 
 Each image consisted of a single ROC curve plot or a panel of multiple
-plots. Each plot was inspected manually for the following design
-features: the number of curves displayed, the type of axis labels
-(sensitivity/ 1 - specificity or true/false positive fractions),
-presence or absence of grid lines, presence or absence of a diagonal
-guide line, whether any cutpoints were indicated, the type of curve
-label (legend or direct label), and presence of other textual
-annotations such as the AUC. The numerical results of the survey are
-summarized in Table \ref{table1}.
+plots. I inspected each plot manually for the following design features:
+the number of curves displayed, the type of axis labels (sensitivity/ 1
+- specificity or true/false positive fractions), presence or absence of
+grid lines, presence or absence of a diagonal guide line, whether any
+cutpoints were indicated, the type of curve label (legend or direct
+label), and presence of other textual annotations such as the AUC. The
+numerical results of the survey are summarized in Table \ref{table1}.
 
 \begin{table}[ht]
 \centering
@@ -318,8 +318,8 @@ these features.
 \end{figure}
 \end{Schunk}
 
-The vast majority of the figures that were reviewed looked more like
-those in panels A and B than those in C and D. While plots like this do
+The vast majority of the figures that I reviewed looked more like those
+in panels A and B than those in C and D. While plots like this do
 technically display the trade-offs between false- and true-positives,
 they minimize the amount of useful information that can be displayed in
 the space needed to plot an ROC curve. The plots created by
@@ -386,10 +386,10 @@ R> test <- data.frame(D = D.ex, D.str = c("Healthy", "Ill")[D.ex + 1],
 
 As of version 1.0.1, the \pkg{ggplot2} package \citep{ggplot2} exports
 the previously internal functions \code{Geom} and \code{Stat}. This
-enables developers to create their own statistical tranformations and
-geometric layers, while enjoying all of the other features of
-\pkg{ggplot2}. We have implemented the empirical ROC curve estimate and
-the calculation of exact confidence regions as statistical
+enables developers to create their own statistical tranformations
+(stats) and geometric layers (geoms), while enjoying all of the other
+features of \pkg{ggplot2}. We have implemented the empirical ROC curve
+estimate and the calculation of exact confidence regions as statistical
 transformations: \code{stat_roc} and \code{stat_rocci}, respectively. We
 have also defined geometric layers for the ROC curve and confidence
 regions for the ROC curve: \code{geom_roc} and \code{geom_rocci},
@@ -399,8 +399,9 @@ graphics as implemented in \pkg{ggplot2}, we refer readers to
 
 To use the ROC geometric layer, I use the \code{ggplot} function to
 define the aesthetic mappings, and the \code{geom_roc} function to add
-an ROC curve layer. The \code{geom_roc} function requires the named
-aesthetics \code{d} for disease status, and \code{m} for marker. By
+an ROC curve layer. The \code{geom_roc} function requires that the named
+aesthetics \code{d} for disease status, and \code{m} for marker be
+present in the \code{aes} function call inside \code{ggplot}. By
 default, the ROC geom and stat are linked, so that when \code{geom_roc}
 is called, \code{stat_roc} does the computation, and when
 \code{stat_roc} is called, \code{geom_roc} is used to plot the layer.
@@ -426,7 +427,8 @@ of significant digits can be adjusted with \code{labelsize} and
 \begin{Schunk}
 \begin{Sinput}
 R> ggplot(test, aes(d = D, m = M1)) + geom_roc(n.cuts = 0)
-R> ggplot(test, aes(d = D, m = M1)) + geom_roc(n.cuts = 5, labelsize = 5, labelround = 2)
+R> ggplot(test, aes(d = D, m = M1)) + geom_roc(n.cuts = 5, 
++                                             labelsize = 5, labelround = 2)
 R> ggplot(test, aes(d = D, m = M1)) + geom_roc(n.cuts = 50, labels = FALSE)
 \end{Sinput}
 \end{Schunk}
@@ -445,7 +447,7 @@ pair.
 This is implemented in the \code{stat_rocci} and displayed as a
 \code{geom_rocci} layer. These both require the same aesthetics as the
 ROC geom, \code{d} for disease status and \code{m} for marker. By
-default, a set of 3 evenly spaced points along the curve are chosed to
+default, a set of 3 evenly spaced points along the curve are chosen to
 display confidence regions. Points corresponding to the confidence
 regions are distiguished from the others with a different symbol. You
 can select points by passing a vector of values in the range of \code{m}
@@ -461,7 +463,6 @@ R> basicplot + geom_rocci()
 \includegraphics{figure/test-a-ci-1} \caption{Illustration of \pkg{plotROC} with exact confidence regions. \label{ciex}}\label{fig:test-a-ci}
 \end{figure}
 \begin{Sinput}
-R> ## 
 R> ## basicplot + geom_rocci(sig.level = .01)
 R> ## ggplot(test, aes(d = D, m = M1)) + geom_roc(n.cuts = 0) +
 R> ##   geom_rocci(ci.at = quantile(M1, c(.1, .4, .5, .6, .9)))
@@ -477,7 +478,7 @@ function \texttt{style\_roc()} which is a layer containing a theme,
 modified gridlines, and axes. Adding the \texttt{style\_roc()} layer to
 the ggplot object creates a plot with sensible defaults for use in
 print. This function has options for the number and location of major
-and minor breaks, addition of the diagnoal guideline, axis labels, and
+and minor breaks, addition of the diagonal guideline, axis labels, and
 any theme object created for use with ggplot2 can be supplied.
 
 The \code{direct_label} function takes a ggplot object as an argument
@@ -493,12 +494,11 @@ simple example with the default options is shown in Figure \ref{first}.
 R> direct_label(basicplot) + style_roc()
 \end{Sinput}
 \begin{figure}
-\includegraphics{figure/print-1} \caption{Illustration of ROC curve plot generated by \pkg{plotROC} for use in print. \label{first}}\label{fig:print}
+\includegraphics{figure/print-1} \caption{Illustration of ROC curve plot generated by \pkg{plotROC} with the styles and direct labels applied for use in print. \label{first}}\label{fig:print}
 \end{figure}
 \begin{Sinput}
-R> ## 
 R> ## basicplot + style_roc(theme = theme_grey, xlab = "1 - Specificity")
-R> ## direct_label(basicplot, labels = "Biomarker", nudge_y = -.1) + style_roc()
+R> ## direct_label(basicplot, labels = "Biomarker", nudge_y = -.1)
 \end{Sinput}
 \end{Schunk}
 
@@ -521,7 +521,7 @@ the Roc geom can be hidden by using the \code{hide.points = TRUE}
 option. Then, points and labels will be displayed only when the mouse is
 hovering over the plotting region. Also by default, the \code{style_roc}
 function is applied, the settings can be modified by passing a call to
-that function.
+that function or setting it to NULL.
 
 \begin{Schunk}
 \begin{Sinput}
@@ -627,16 +627,17 @@ M16 1 0.66703989   M1
 \end{Schunk}
 
 Then, the dataset can be passed to the \code{ggplot} function, with the
-marker name given as a grouping or faceting variable.
+marker name given as a grouping or faceting variable. Some examples of
+its usage are given below.
 
 \begin{Schunk}
 \begin{Sinput}
-R> ggplot(longtest, aes(d = D, m = M, color = name)) + geom_roc() + style_roc()
-R> ggplot(longtest, aes(d = D, m = M)) + geom_roc() + facet_wrap(~ name) + style_roc()
+R> ggplot(longtest, aes(d = D, m = M, color = name)) + geom_roc()
+R> ggplot(longtest, aes(d = D, m = M)) + geom_roc() + facet_wrap(~ name)
 R> ggplot(longtest, aes(d = D, m = M, linetype = name)) + geom_roc() + geom_rocci()
-R> ggplot(longtest, aes(d = D, m = M, color = name)) + geom_roc() + style_roc()
+R> ggplot(longtest, aes(d = D, m = M, color = name)) + geom_roc() 
 R> pairplot <- ggplot(longtest, aes(d = D, m = M, color = name)) + 
-+   geom_roc(show.legend = FALSE) + style_roc()
++   geom_roc(show.legend = FALSE)
 R> direct_label(pairplot)
 R> 
 R> pairplot + geom_rocci()
@@ -652,7 +653,8 @@ example dataset.
 \begin{Sinput}
 R> D.cov <- rbinom(400, 1, .5)
 R> gender <- c("Male", "Female")[rbinom(400, 1, .49) + 1]
-R> M.diff <- rnorm(400, mean = D.cov, sd = ifelse(gender == "Male", .5, 1.5))
+R> M.diff <- rnorm(400, mean = D.cov, 
++                 sd = ifelse(gender == "Male", .5, 1.5))
 R> 
 R> test.cov <- data.frame(D = D.cov, gender = gender, M = M.diff)
 \end{Sinput}
@@ -678,11 +680,10 @@ supported.
 
 \pkg{plotROC} uses the \pkg{ggplot2} package to create the objects to be
 plotted. Therefore, themes and annotations can be added in the usual
-\pkg{ggplot2} way. A \code{plot_journal_roc} figure with a new theme,
-title, axis label, and AUC annotation is shown in Figure \ref{annotate}.
-\pkg{plotROC} provides the convenience function \code{calc_auc} that
-takes a ggplot object that has an Roc layer, extracts the data, and
-calculates the AUC.
+\pkg{ggplot2} way. A figure with a new theme, title, axis label, and AUC
+annotation is shown in Figure \ref{annotate}. \pkg{plotROC} provides the
+convenience function \code{calc_auc} that takes a ggplot object that has
+an Roc layer, extracts the data, and calculates the AUC.
 
 \begin{Schunk}
 \begin{Sinput}
@@ -732,7 +733,7 @@ R> binorm.roc <- data.frame(c = c.ex,
 +                              )
 R> 
 R> binorm.plot <- ggplot(binorm.roc, aes(x = FPF, y = TPF, label = c)) + 
-+   geom_roc(stat = "identity") + style_roc(theme = theme_grey)
++   geom_roc(stat = "identity") + style_roc()
 \end{Sinput}
 \end{Schunk}
 
@@ -740,9 +741,6 @@ The example is shown in Figure \ref{binorm}. Interactive plots with
 \code{stat = 'identity'} are not currently supported.
 
 \begin{Schunk}
-\begin{Sinput}
-R> binorm.plot
-\end{Sinput}
 \begin{figure}
 \includegraphics{figure/binormal-1} \caption[Illustration of smooth binormal ROC curve]{Illustration of smooth binormal ROC curve. \label{binorm}}\label{fig:binormal}
 \end{figure}
@@ -831,7 +829,9 @@ or functions handle the rendering and interactivity. \pkg{plotROC} lets
 across print and web-based media, and retaining the distinctive
 \proglang{R} style. This also allows users to manipulate the figures
 directly in \proglang{R} to suit their needs, using tools that are more
-accessible and familiar to most \proglang{R} users.
+accessible and familiar to most \proglang{R} users. Then, the
+\proglang{JavaScript} adds a layer of interactivity to the rendered
+figures.
 
 \section{Discussion}\label{discussion}
 
