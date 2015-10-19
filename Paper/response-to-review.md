@@ -5,7 +5,9 @@ Thanks to the reviewers' comments, and some recent changes to ggplot2, the plotR
 - The calculate_roc, ggroc, and plot_journal_roc functions are deprecated. 
 - I have implemented the geom_roc, geom_rocci geometric layers, and stat_roc, stat_rocci statistical transformations. A recent update to ggplot2 now exports the Geom and Stat functions so that developers can create their own and be compatible with the other features of ggplot2. This is what we have done instead of the previous approach of "hacking" the existing ggplot2 geoms. The usage is now simplified to:
 
-    p1 <- ggplot(data, aes(m = M, d = D)) + geom_roc() + geom_rocci() 
+```r
+p1 <- ggplot(data, aes(m = M, d = D)) + geom_roc() + geom_rocci() 
+```
 	
  - The stat functions perform the calculations and the geoms add the visual elements. The user only has to specify the marker value m and binary outcome d, optionally with grouping or faceting. 
  - The resulting ggplot object can be passed to the plot_interactive_roc or export_interactive_roc functions to create interactive figures. Grouping and faceting are fully supported. 
@@ -16,9 +18,10 @@ Thanks to the reviewers' comments, and some recent changes to ggplot2, the plotR
  
 The new version is not currently on CRAN, but I expect it will be in the next few months after ggplot2 is updated. To install, follow these two steps: 
 
+```r
 devtools::install_github("hadley/ggplot2")
 devtools::install_github("sachsmc/plotROC")
-
+```
 
 I thank the reviewers and editors for their helpful comments, and I hope you find the updated paper and package to be vastly improved. Below are point-by-point responses to the reviewers' comments. 
 
@@ -31,11 +34,13 @@ I thank the reviewers and editors for their helpful comments, and I hope you fin
 ## Bug report:
 > The confidence intervals are apparently bogus. The following code executed in Rstudio or from the command line, with R 3.1.3 on Ubuntu 14.04 (from CRAN's Debian repository) and R 3.1.2 on Mac OS Yosemite (from Fink):
 
+```r
 set.seed(42)
 D.ex <- rbinom(100, size = 1, prob = .5)
 M.ex <- rnorm(100, mean = D.ex)
 roc.estimate <- calculate_roc(round(M.ex, 2), D.ex, ci = TRUE)
 plot_interactive_roc(ggroc(roc.estimate, ci = TRUE))
+```
 
 > After clicking on a point around 1.6, I got the screenshot shown in Figure 1. This seems related to the rounding (here to the 2nd decimal).
 
@@ -44,7 +49,7 @@ Thank you for the bug report. I believe this was due to the way the previous fun
 ## General:
 > • The manuscript is written partially in the first person. It is surprising and not totally consistent throughout the manuscript, some of which is written in passive tense (for instance “Labels can be added easily [...]”).
 
-The manuscript has been edited to be consistent with the use of active voice. 
+I have edited the manuscript to be more consistent with the use of active voice. 
 
 > • The abstract highlights the literature review as a significant finding. Surprisingly it is is only briefly mentioned in the introduction. This seems a bit inconsistent. 
 
@@ -126,9 +131,11 @@ This was a personal choice and unfortunately it won't please everyone. I opted t
 
 
 > • Wouldn't it be more idiomatic to introduce the roc as a ggplot geometry? That would allow some much more straightforward syntax like:
-data.for.roc <- data.frame(M.ex, D.ex)
-qplot(M.ex, D.ex, data = data.for.roc) + geom_roc()
-or suchlike that would be much easier to remember.
+> ```r
+> data.for.roc <- data.frame(M.ex, D.ex)
+> qplot(M.ex, D.ex, data = data.for.roc) + geom_roc()
+> ```
+>or suchlike that would be much easier to remember.
 
 Yes I totally agree, and now is is possible since the Geom and Stat functions are exported from ggplot2. However, the qplot function in ggplot2 is now being deprecated, thus it is necessary to use the ggplot(data, aes(m = M, d = D)) + geom_roc() construction. I expect the updates to be on CRAN in the next few months. 
 
@@ -161,6 +168,7 @@ Cutoffs are included by default, and the user can adjust the number of cutoffs u
 This has been changed and now the only hard dependency is ggplot2. 
 
 > • On my Ubuntu system, the Download button opens a 404 error page with URL as http://127.0.0.1:3048/session/61edd0aac13532dc34788b220e9d27c8/downlo ad/printDownload?w= instead of downloading the image. I can right click the image and “View image” normally. The download works properly on my Mac where a tab shortly opens before the download starts.
+
 I cannot replicate the error, perhaps it was a shiny bug that got fixed? Is this using the locally running version of the shiny app, or the shinyapps.io hosted version?  Which browsers did this occur in? It seems to work on Ubuntu 14.04 with Firefox. 
 
 > • The browse button appears very low in the page and is not visible enough IMO.
@@ -189,24 +197,24 @@ It was my intention to develop a useful tool for plotting, which seemed to be la
 This has been corrected in the updated version. The (0,0) and (1,1) points are now always included in the computation output. 
 
 	
-	- plotROC seems to implictly define that samples ">" the threshold are positive, samples "<=" the threshold are negative. In this it differs from e.g. Fawcett "An introduction to ROC analysis" or other software (e.g. the ROCR package) that define samples ">=" the threshold as a positive prediction.
+>	- plotROC seems to implictly define that samples ">" the threshold are positive, samples "<=" the threshold are negative. In this it differs from e.g. Fawcett "An introduction to ROC analysis" or other software (e.g. the ROCR package) that define samples ">=" the threshold as a positive prediction.
 	
 This was an oversight and I thank you for pointing out the error. This has been corrected in the computation and in the text of the introduction. 
 
-	- It is not obvious how plotROC handles ties (i.e. samples with identical numerical measurements)
+>	- It is not obvious how plotROC handles ties (i.e. samples with identical numerical measurements)
 
 The computation handles ties correctly by including them in the calculation of the proportions, and then removing the duplicated elements from the results. This is the same as what is implemented in the ROCR package. 
 
-	- The paper defines "good outcome" and "bad outcome" in Section 1.1. These definitions seem to ignore half of the confusion matrix (i.e. ignoring true and false negatives).
+>	- The paper defines "good outcome" and "bad outcome" in Section 1.1. These definitions seem to ignore half of the confusion matrix (i.e. ignoring true and false negatives).
 	
 
 This section has been revamped and edited for clarity. The good and bad outcome terminology has been removed and the confusion matrix illustrating the concepts has been added as table 1. 
 
-	- In "Help and Documentation" of the webpage, the confusion matrix and the definitions seem to be copied from Wikipedia. Credits and reference are needed.
+>	- In "Help and Documentation" of the webpage, the confusion matrix and the definitions seem to be copied from Wikipedia. Credits and reference are needed.
 	
 This is correct, it has been adapted from Wikipedia. I added a reference and link. 
 
-	- The website states "confidence level = 0.05". Should this be "significance level" instead?
+>	- The website states "confidence level = 0.05". Should this be "significance level" instead?
 
 Yes this has been changed to significance level. 
 

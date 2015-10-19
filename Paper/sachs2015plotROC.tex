@@ -98,6 +98,7 @@ trade-offs between the test's fraction of true positives versus the
 false positives as \(c\) varies over the range of \(M\).
 
 \begin{table}
+\begin{center}
 \begin{tabular}{l|c|c|c}
 \multicolumn{1}{c}{}&\multicolumn{2}{c}{$D$}&\\
 \cline{2-3}
@@ -110,6 +111,7 @@ false positives as \(c\) varies over the range of \(M\).
 \multicolumn{1}{c}{Total} & \multicolumn{1}{c}{disease positive} & \multicolumn{1}{c}{disease negative} & \multicolumn{1}{c}{}\\
 \end{tabular}
 \caption{\label{confus} Confusion matrix illustrating the possible classification outcomes of a continuous test $M$ with threshold $c$ versus the true outcome $D$. }
+\end{center}
 \end{table}
 
 Formally, for a fixed cutoff \(c\), the true positive fraction is the
@@ -345,12 +347,17 @@ here: http://sachsmc.shinyapps.io/plotROC.
 
 \subsection{Installation and loading}\label{installation-and-loading}
 
-\pkg{plotROC} can be installed from the Comprehensive \proglang{R}
-Archive Network, or installed from source.
+Users can install the latest version of \pkg{plotROC} from github, as
+shown below. The package will appear on the Comprehensive \proglang{R}
+Archive Network in the near future. It can also be downloaded from
+https://github.com/sachsmc/plotROC and installed from source. As of
+October 19, 2015, \pkg{plotROC} also requires the development version of
+\pkg{ggplot2} also available from github.
 
 \begin{Schunk}
 \begin{Sinput}
-R> install.packages("plotROC")
+R> devtools::install_github("hadley/ggplot2")
+R> devtools::install_github("sachsmc/plotROC")
 R> library(plotROC)
 \end{Sinput}
 \end{Schunk}
@@ -527,7 +534,7 @@ that function or setting it to NULL.
 \begin{Sinput}
 R> plot_interactive_roc(basicplot)
 R> plot_interactive_roc(basicplot, hide.points = TRUE)
-R> plot_interactive_roc(basicplot, style = style_roc(theme = theme_bw()))
+R> plot_interactive_roc(basicplot, style = style_roc(theme = theme_bw))
 \end{Sinput}
 \end{Schunk}
 
@@ -545,11 +552,11 @@ When the user clicks on the ROC curve, the confidence region for the TPF
 and FPF is overlaid using a grey rectangle. The label and region stick
 until the next click.
 
-An interactive ROC plot can be exported by using the
+Users can export an interactive ROC plot by using the
 \code{export_interactive_roc} function, which returns a character string
 containing the necessary \proglang{HTML} and \proglang{JavaScript}. The
 \proglang{JavaScript} source can be omitted by using the
-\code{omit.js = TRUE} option. You may wish to do this when there are
+\code{omit.js = TRUE} option. Users may wish to do this when there are
 multiple interactive figures in a single document; the source only needs
 to be included once. The character string can be copy-pasted into an
 html document, or better yet, incorporated directly into a dynamic
@@ -582,7 +589,7 @@ cat(
 If you have grouping factors in your dataset, or you have multiple
 markers measured on the same subjects, you may wish to plot multiple ROC
 curves on the same plot. \pkg{plotROC} fully supports faceting and
-grouping done by \pkg{ggplot2}. In out example dataset, we have 2
+grouping as done by \pkg{ggplot2}. In my example dataset, there are 2
 markers measured in a paired manner:
 
 \begin{Schunk}
@@ -602,7 +609,7 @@ R> head(test)
 
 These data are in wide format, with the 2 markers going across 2
 columns. \pkg{ggplot2} requires long format, with the marker result in a
-single column, and a third variable identifying the marker. We provide
+single column, and a third variable identifying the marker. I provide
 the convenience function \code{melt_roc} to perform this transformation.
 The arguments are the data frame, a name or index identifying the
 disease status column, and a vector of names or indices identifying the
@@ -671,15 +678,15 @@ R> direct_label(bygend) + style_roc()
 \end{figure}
 \end{Schunk}
 
-Interactive versions of the plots with grouping and faceting are fully
-supported.
+This example is displayed in Figure \ref{multi}. Interactive versions of
+the plots with grouping and faceting are fully supported.
 
 \subsection{Advanced options}\label{advanced-options}
 
 \subsubsection{Themes and annotations}\label{themes-and-annotations}
 
 \pkg{plotROC} uses the \pkg{ggplot2} package to create the objects to be
-plotted. Therefore, themes and annotations can be added in the usual
+plotted. Therefore, users can add themes and annotations in the usual
 \pkg{ggplot2} way. A figure with a new theme, title, axis label, and AUC
 annotation is shown in Figure \ref{annotate}. \pkg{plotROC} provides the
 convenience function \code{calc_auc} that takes a ggplot object that has

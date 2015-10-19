@@ -44,6 +44,7 @@ The Receiver Operating Characteristic (ROC) curve is used to assess the accuracy
 For a continuous measurement that I denote as $M$, convention dictates that a test positive is defined as $M$ equalling or exceeding some threshold $c$: $M \geq c$. The goal of ROC analysis is to evaluate the classification accuracy of $M$ in reference to the binary outcome $D$, which takes possible values $0$ (negative) or $1$ (positive). It is implicitly assumed that the subpopulation having $D = 1$ tends to have larger values of $M$ compared to the subpopulation with $D = 0$. The classification accuracy of $M$ can be evaluated by considering the confusion matrix (Table \ref{confus}). The confusion matrix cross-classifies the predicted outcome $M \geq c$ versus the true outcome $D$. The four cells of the matrix correspond to the possible classification outcomes: a true positive, a false positive, a true negative, and a false negative. ROC analysis assesses the trade-offs between the test's fraction of true positives versus the false positives as $c$ varies over the range of $M$. 
 
 \begin{table}
+\begin{center}
 \begin{tabular}{l|c|c|c}
 \multicolumn{1}{c}{}&\multicolumn{2}{c}{$D$}&\\
 \cline{2-3}
@@ -56,6 +57,7 @@ For a continuous measurement that I denote as $M$, convention dictates that a te
 \multicolumn{1}{c}{Total} & \multicolumn{1}{c}{disease positive} & \multicolumn{1}{c}{disease negative} & \multicolumn{1}{c}{}\\
 \end{tabular}
 \caption{\label{confus} Confusion matrix illustrating the possible classification outcomes of a continuous test $M$ with threshold $c$ versus the true outcome $D$. }
+\end{center}
 \end{table}
 
 Formally, for a fixed cutoff $c$, the true positive fraction is the probability of a test positive in the diseased population:
@@ -206,10 +208,11 @@ I created a \pkg{shiny} application [@shiny] in order to make the features more 
 
 ## Installation and loading
 
-\pkg{plotROC} can be installed from the Comprehensive \proglang{R} Archive Network, or installed from source. 
+Users can install the latest version of \pkg{plotROC} from github, as shown below. The package will appear on the Comprehensive \proglang{R} Archive Network in the near future. It can also be downloaded from https://github.com/sachsmc/plotROC and installed from source. As of October 19, 2015, \pkg{plotROC} also requires the development version of \pkg{ggplot2} also available from github. 
 
 ```{r load, eval = FALSE}
-install.packages("plotROC")
+devtools::install_github("hadley/ggplot2")
+devtools::install_github("sachsmc/plotROC")
 library(plotROC)
 ```
 
@@ -290,7 +293,7 @@ The \code{basicplot} object, which is of class ggplot, can be used to create an 
 ```{r inter, eval = FALSE}
 plot_interactive_roc(basicplot)
 plot_interactive_roc(basicplot, hide.points = TRUE)
-plot_interactive_roc(basicplot, style = style_roc(theme = theme_bw()))
+plot_interactive_roc(basicplot, style = style_roc(theme = theme_bw))
 ```
 
 \begin{figure}[ht]
@@ -301,7 +304,7 @@ plot_interactive_roc(basicplot, style = style_roc(theme = theme_bw()))
 
 Hovering over the display shows the cutoff value at the point nearest to the cursor. Clicking makes the cutoff label stick until the next click, and if confidence regions are available, clicks will also display those as grey rectangles. The confidence regions are automatically detected. When the user clicks on the ROC curve, the confidence region for the TPF and FPF is overlaid using a grey rectangle. The label and region stick until the next click.
 
-An interactive ROC plot can be exported by using the \code{export_interactive_roc} function, which returns a character string containing the necessary \proglang{HTML} and \proglang{JavaScript}. The \proglang{JavaScript} source can be omitted by using the \code{omit.js = TRUE} option. You may wish to do this when there are multiple interactive figures in a single document; the source only needs to be included once. The character string can be copy-pasted into an html document, or better yet, incorporated directly into a dynamic document using \pkg{knitr} [@knitr]. In a \pkg{knitr} document, it is necessary to use the \code{cat} function on the results and use the chunk options \code{results = 'asis'} and \code{fig.keep = 'none'} so that the interactive plot is displayed correctly. For documents that contain multiple interactive plots, it is necessary to assign each plot a unique name using the \code{prefix} argument of \code{export_interactive_roc}. This is necessary to ensure that the \proglang{JavaScript} code manipulates the correct svg elements. For examples of interactive plots and how to incorporate them into \pkg{knitr} documents, see the package vignette (\code{vignette("examples", package = "plotROC")}) or the web page https://sachsmc.github.io/plotROC/. The next code block shows an example \pkg{knitr} chunk that can be used in an .Rmd document to display an interactive plot. 
+Users can export an interactive ROC plot by using the \code{export_interactive_roc} function, which returns a character string containing the necessary \proglang{HTML} and \proglang{JavaScript}. The \proglang{JavaScript} source can be omitted by using the \code{omit.js = TRUE} option. Users may wish to do this when there are multiple interactive figures in a single document; the source only needs to be included once. The character string can be copy-pasted into an html document, or better yet, incorporated directly into a dynamic document using \pkg{knitr} [@knitr]. In a \pkg{knitr} document, it is necessary to use the \code{cat} function on the results and use the chunk options \code{results = 'asis'} and \code{fig.keep = 'none'} so that the interactive plot is displayed correctly. For documents that contain multiple interactive plots, it is necessary to assign each plot a unique name using the \code{prefix} argument of \code{export_interactive_roc}. This is necessary to ensure that the \proglang{JavaScript} code manipulates the correct svg elements. For examples of interactive plots and how to incorporate them into \pkg{knitr} documents, see the package vignette (\code{vignette("examples", package = "plotROC")}) or the web page https://sachsmc.github.io/plotROC/. The next code block shows an example \pkg{knitr} chunk that can be used in an .Rmd document to display an interactive plot. 
 
 \begin{Code}
 `r paste("\x60\x60\x60{r int-no, results = 'asis', fig.keep = 'none'}")`
@@ -316,13 +319,13 @@ cat(
 
 ### Multiple ROC curves
 
-If you have grouping factors in your dataset, or you have multiple markers measured on the same subjects, you may wish to plot multiple ROC curves on the same plot. \pkg{plotROC} fully supports faceting and grouping done by \pkg{ggplot2}. In out example dataset, we have 2 markers measured in a paired manner: 
+If you have grouping factors in your dataset, or you have multiple markers measured on the same subjects, you may wish to plot multiple ROC curves on the same plot. \pkg{plotROC} fully supports faceting and grouping as done by \pkg{ggplot2}. In my example dataset, there are 2 markers measured in a paired manner: 
 
 ```{r head}
 head(test)
 ```
 
-These data are in wide format, with the 2 markers going across 2 columns. \pkg{ggplot2} requires long format, with the marker result in a single column, and a third variable identifying the marker. We provide the convenience function \code{melt_roc} to perform this transformation. The arguments are the data frame, a name or index identifying the disease status column, and a vector of names or indices identifying the the markers. Optionally, the names argument gives a vector of names to assign to the marker, replacing their column names. The result is a data frame in long format.
+These data are in wide format, with the 2 markers going across 2 columns. \pkg{ggplot2} requires long format, with the marker result in a single column, and a third variable identifying the marker. I provide the convenience function \code{melt_roc} to perform this transformation. The arguments are the data frame, a name or index identifying the disease status column, and a vector of names or indices identifying the the markers. Optionally, the names argument gives a vector of names to assign to the marker, replacing their column names. The result is a data frame in long format.
 
 ```{r}
 longtest <- melt_roc(test, "D", c("M1", "M2"))
@@ -365,14 +368,14 @@ bygend <- ggplot(test.cov, aes(d = D, m = M, color = gender)) +
 direct_label(bygend) + style_roc()
 ```
 
-Interactive versions of the plots with grouping and faceting are fully supported. 
+This example is displayed in Figure \ref{multi}. Interactive versions of the plots with grouping and faceting are fully supported. 
 
 
 ## Advanced options
 
 ### Themes and annotations
 
-\pkg{plotROC} uses the \pkg{ggplot2} package to create the objects to be plotted. Therefore, themes and annotations can be added in the usual \pkg{ggplot2} way. A figure with a new theme, title, axis label, and AUC annotation is shown in Figure \ref{annotate}. \pkg{plotROC} provides the convenience function \code{calc_auc} that takes a ggplot object that has an Roc layer, extracts the data, and calculates the AUC. 
+\pkg{plotROC} uses the \pkg{ggplot2} package to create the objects to be plotted. Therefore, users can add themes and annotations in the usual \pkg{ggplot2} way. A figure with a new theme, title, axis label, and AUC annotation is shown in Figure \ref{annotate}. \pkg{plotROC} provides the convenience function \code{calc_auc} that takes a ggplot object that has an Roc layer, extracts the data, and calculates the AUC. 
 
 ```{r print2s, warning = FALSE, message = FALSE}
 annotate <- basicplot + style_roc(theme = theme_grey) +
