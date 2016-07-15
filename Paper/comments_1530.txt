@@ -1,0 +1,58 @@
+The author has made significant improvements to the software and the 
+article.  Only the minor changes described below are required.
+
+*** Comments for the author ***
+
+Associate Editor:
+
+I agree with reviewer 2 that the title should remove or replace the word 
+"better".
+
+[page 11]
+The following text is duplicated in paragraphs 1 and 2:
+"Hovering over the display shows the cutoff value at the point nearest 
+to the cursor. Clicking makes the cutoff label stick until the next 
+click, and if confidence regions are available, clicks will also display 
+those as grey rectangles."
+
+[page 15]
+As pointed out previously by one reviewer, the article still wanders 
+into the first person in places.  The language also becomes very 
+casual/conversational/bloggy in places, e.g., "but I decided to ...", 
+"The idea is that ..."
+
+Reviewer 1:
+
+In this revised version of the package, the author worked out a very 
+nice integration with ggplot, with custom geometries, statistics and a 
+theme in a way I wish to see more often in R packages. Faceting is 
+available quite naturally with a melt function that blends nicely in the 
+ggplot framework. This is very nice and relatively easy to use as 
+advertised for simple ROC plots.
+
+The calculations now seem accurate. I am also happy with the revised 
+manuscript and web interface, and recommend to accept the manuscript.
+
+Reviewer 2:
+
+The paper has been revised and most previous concerns have been
+adressed appropriately. The rewrite of the software package ensures a
+fit with the ggplot2 framework and allows to elegantly use features
+like grouping and facetting.
+
+A few remaining comments:
+- As pointed out in the last review, the title "better tool for
+plotting ROC curves" suggests that the tool is designed to outperform
+or replace other available tools like pROC and ROCR. While this tool
+offers new and useful ideas, it is lacking many of the features
+offered in other packages. Maybe use a slightly more modest title?
+
+- The package is currently only available via github, not yet via
+CRAN. Would it make sense to ensure CRAN availability before
+publishing the paper?
+
+- The package depends on the development version of ggplot2. How can
+be ensured that plotROC runs with the development version of at the
+time the user/reader installs it via install_github?
+
+

@@ -69,6 +69,7 @@ print(xtable(table1, label = "table1",
 
 
 ## ----figure1, fig.width = 6, fig.height = 6, message = FALSE, echo = FALSE, fig.cap = "Illustration of design choices in plotting ROC curves. Panel A shows a sparse ROC curve, with no design additions inside the plotting region. The plot results in more white space than anything else. It is difficult to accurately determine values without reference lines. Panel B shows a plot comparing 2 curves, with different line types and a legend. AUCs are also given in the legend. Panels C and D add gridlines, diagonal reference lines, and direct labels. \\label{figure1}"----
+
 library(plotROC)
 
 set.seed(520)
@@ -110,9 +111,8 @@ text(.2, .8, "A")
 text(.3, .4, "B")
 
 ## ----load, eval = FALSE--------------------------------------------------
-## devtools::install_github("hadley/ggplot2")
-## devtools::install_github("sachsmc/plotROC")
-## library(plotROC)
+# install.packages(c("ggplot2", "plotROC"))
+library(plotROC)
 
 ## ----shiny, eval = FALSE-------------------------------------------------
 shiny_plotROC()

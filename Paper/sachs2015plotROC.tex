@@ -12,13 +12,13 @@
 \author{		Michael C. Sachs\\Biometric Research Branch, Division of Cancer Treatment and Diagnosis,
 National Cancer Institute		}
 
-\title{\pkg{plotROC}: A Better Tool for Plotting ROC Curves}
+\title{\pkg{plotROC}: A Tool for Plotting ROC Curves}
 
 %% for pretty printing and a nice hypersummary also set:
 \Plainauthor{ Michael C. Sachs} %% comma-separated
-\Plaintitle{plotROC: A Better Tool for Plotting ROC Curves} %% without formatting
+\Plaintitle{plotROC: A Tool for Plotting ROC Curves} %% without formatting
 
-\Shorttitle{\pkg{plotROC}: A Better Tool for Plotting ROC Curves} %% a short title (if necessary)
+\Shorttitle{\pkg{plotROC}: A Tool for Plotting ROC Curves} %% a short title (if necessary)
 %% an abstract and keywords
 \Abstract{
   Plots of the receiver operating characteristic (ROC) curve are
@@ -138,7 +138,7 @@ the upper left quadrant above the diagonal line, however this may not be
 the case in a particular sample.
 
 Given a sample of test and disease status pairs,
-\((M_1, D_1), \ldots, (M_n, D_n)\), I can estimate the ROC curve by
+\((M_1, D_1), \ldots, (M_n, D_n)\), one can estimate the ROC curve by
 computing proportions in the diseased and healthy subgroups separately.
 Specifically, given a fixed cutoff \(c\), an estimate of the \(TPF(c)\)
 is the proportion of test positives among the diseased subgroup:
@@ -156,7 +156,7 @@ Other methods exist to estimate the ROC curve, such as the binormal
 parametric estimate which can be used to get a smooth curve. There are
 also extensions that allow for estimation with time-to-event outcomes
 subject to censoring. For a more thorough reference on the methods and
-theory surrounding ROC curves, I refer interested readers to
+theory surrounding ROC curves, interested readers may look to
 \citet{pepe2003statistical}.
 
 A common way to summarize the value of a test for classifying disease
@@ -197,8 +197,8 @@ of the jargon sensitivity and specificity. Sensitivity is equivalent to
 the true positive fraction. Specificity is 1 - FPF, the true negative
 fraction. Sometimes, the FPF and TPF are incorrectly referred to as
 rates, using the abbreviations FPR and TPR. These are probabilities and
-their estimates are proportions, therefore I prefer the use of the term
-fraction as opposed to rate.
+their estimates are proportions, therefore the use of the term fraction
+as opposed to rate is preferred.
 
 \subsection{Existing plotting
 software}\label{existing-plotting-software}
@@ -207,7 +207,7 @@ The ROC curve plot is, at the most basic level, a line graph. Therefore,
 once the appropriate statistics are estimated, existing plotting
 functions can be used to create an ROC curve plot. Viewers can identify
 ROC plots through context, by observing the shape of the line, and
-through the addition of axis labels, titles, legends, and so on. In my
+through the addition of axis labels, titles, legends, and so on. In a
 review of the oncology literature, I observed plots with the distinctive
 characteristics of the plotting functions from Microsoft Excel
 \citep{excel}, \proglang{SAS} \citep{sas}, \proglang{SPSS} \citep{spss},
@@ -224,8 +224,8 @@ labels (\code{print.thres = TRUE}) and is mainly focused on estimating
 confidence intervals and regions for restricted ranges of the ROC curve.
 The plotting methods therein use the base \proglang{R} plotting
 functions to create nice displays of the curves along with shaded
-confidence regions. My \pkg{plotROC} package uses the \pkg{ggplot2}
-\citep{ggplot2} plotting library to create clear, informative ROC plots,
+confidence regions. The \pkg{plotROC} package uses the \pkg{ggplot2}
+\citep{ggplot2} plotting package to create clear, informative ROC plots,
 with interactive features for use on the web, and sensible defaults for
 use in print.
 
@@ -303,16 +303,16 @@ ROC curve plots, and the associated design elements. I favor the use of
 gridlines and a diagonal reference line to facilitate accurate readings
 off of the axes. Direct labels are preferred over legends because they
 omit the additional cognitive step of matching line types or colors to
-labels. My \pkg{plotROC} package additionally provides plotting of
+labels. The \pkg{plotROC} package additionally provides plotting of
 cutoff values, which are displayed interactively with the web-based
 output option, and direct labels for print use. Exact confidence regions
 for points on the ROC curve are optionally calculated and displayed.
-Additionally, I use axis scales adjusted to be denser near the margins 0
-and 1. In medical applications, it is often necessary to have a very low
-FPR (less than 10\%, for instance), therefore the smaller scales are
-useful for accurately determining values near the margins. The next
-section details the usage of the \pkg{plotROC} \proglang{R} package and
-these features.
+Additionally, the use of axis scales adjusted to be denser near the
+margins 0 and 1 facilitates accurate reading of FPF and TPF values. In
+medical applications, it is often necessary to have a very low FPF (less
+than 10\%, for instance), therefore the smaller scales are useful for
+accurately determining values near the margins. The next section details
+the usage of the \pkg{plotROC} \proglang{R} package and these features.
 
 \begin{Schunk}
 \begin{figure}
@@ -320,8 +320,8 @@ these features.
 \end{figure}
 \end{Schunk}
 
-The vast majority of the figures that I reviewed looked more like those
-in panels A and B than those in C and D. While plots like this do
+The vast majority of the figures that were reviewed looked more like
+those in panels A and B than those in C and D. While plots like this do
 technically display the trade-offs between false- and true-positives,
 they minimize the amount of useful information that can be displayed in
 the space needed to plot an ROC curve. The plots created by
@@ -337,7 +337,7 @@ density and easily accessible supplementary information.
 
 \subsection{Shiny application}\label{shiny-application}
 
-I created a \pkg{shiny} application \citep{shiny} in order to make the
+A \pkg{shiny} application \citep{shiny} was created in order to make the
 features more accessible to non-\proglang{R} users. A limited subset of
 the functions of \pkg{plotROC} can be performed on an example dataset or
 on data that users upload to the website. Resulting plots can be saved
@@ -347,17 +347,15 @@ here: http://sachsmc.shinyapps.io/plotROC.
 
 \subsection{Installation and loading}\label{installation-and-loading}
 
-Users can install the latest version of \pkg{plotROC} from github, as
-shown below. The package will appear on the Comprehensive \proglang{R}
-Archive Network in the near future. It can also be downloaded from
-https://github.com/sachsmc/plotROC and installed from source. As of
-October 19, 2015, \pkg{plotROC} also requires the development version of
-\pkg{ggplot2} also available from github.
+Users can install the latest version of \pkg{plotROC} from the
+Comprehensive \proglang{R} Archive Network (CRAN). It can also be
+downloaded or installed from https://github.com/sachsmc/plotROC, where
+active development will take place. \pkg{plotROC} also requires at least
+version 2.0.1 of \pkg{ggplot2} which is also available from CRAN.
 
 \begin{Schunk}
 \begin{Sinput}
-R> devtools::install_github("hadley/ggplot2")
-R> devtools::install_github("sachsmc/plotROC")
+R> install.packages(c("ggplot2", "plotROC"))
 R> library(plotROC)
 \end{Sinput}
 \end{Schunk}
@@ -391,23 +389,23 @@ R> test <- data.frame(D = D.ex, D.str = c("Healthy", "Ill")[D.ex + 1],
 
 \subsubsection{The Roc Geom}\label{the-roc-geom}
 
-As of version 1.0.1, the \pkg{ggplot2} package \citep{ggplot2} exports
+As of version 2.0.1, the \pkg{ggplot2} package \citep{ggplot2} exports
 the previously internal functions \code{Geom} and \code{Stat}. This
 enables developers to create their own statistical tranformations
 (stats) and geometric layers (geoms), while enjoying all of the other
-features of \pkg{ggplot2}. We have implemented the empirical ROC curve
+features of \pkg{ggplot2}. I have implemented the empirical ROC curve
 estimate and the calculation of exact confidence regions as statistical
-transformations: \code{stat_roc} and \code{stat_rocci}, respectively. We
+transformations: \code{stat_roc} and \code{stat_rocci}, respectively. I
 have also defined geometric layers for the ROC curve and confidence
 regions for the ROC curve: \code{geom_roc} and \code{geom_rocci},
 respectively. For further discussion and details of the grammar of
-graphics as implemented in \pkg{ggplot2}, we refer readers to
+graphics as implemented in \pkg{ggplot2}, I refer readers to
 \citet{wickham2010layered} and the \pkg{ggplot2} vignettes.
 
 To use the ROC geometric layer, I use the \code{ggplot} function to
 define the aesthetic mappings, and the \code{geom_roc} function to add
 an ROC curve layer. The \code{geom_roc} function requires that the named
-aesthetics \code{d} for disease status, and \code{m} for marker be
+aesthetics \code{d} for disease status, and \code{m} for marker, be
 present in the \code{aes} function call inside \code{ggplot}. By
 default, the ROC geom and stat are linked, so that when \code{geom_roc}
 is called, \code{stat_roc} does the computation, and when
@@ -479,8 +477,8 @@ R> ##   geom_rocci(ci.at = quantile(M1, c(.1, .4, .5, .6, .9)))
 \subsubsection{Styles and Labels}\label{styles-and-labels}
 
 The same objects like \code{basicplot} with Roc and/or Rocci layers can
-be treated like any other ggplot objects. It can be printed to display
-the figure, and other layers can be added to the plot. We provide the
+be treated like any other ggplot objects. They can be printed to display
+the figure, and other layers can be added to the plot. I provide the
 function \texttt{style\_roc()} which is a layer containing a theme,
 modified gridlines, and axes. Adding the \texttt{style\_roc()} layer to
 the ggplot object creates a plot with sensible defaults for use in
@@ -543,14 +541,6 @@ R> plot_interactive_roc(basicplot, style = style_roc(theme = theme_bw))
 \includegraphics{figure/screen-shot.pdf}
 \caption{Screen shot of an interactive plot created with \pkg{plotROC} being displayed in the Rstudio viewer. Hovering the mouse cursor over the plot causes the cutoff label nearest to the cursor to be displayed. Clicking will display a confidence region, if available, and make the label stick until the next click. For live examples, see the package vignette, or go to http://sachsmc.github.io/plotROC. \label{interact}}
 \end{figure}
-
-Hovering over the display shows the cutoff value at the point nearest to
-the cursor. Clicking makes the cutoff label stick until the next click,
-and if confidence regions are available, clicks will also display those
-as grey rectangles. The confidence regions are automatically detected.
-When the user clicks on the ROC curve, the confidence region for the TPF
-and FPF is overlaid using a grey rectangle. The label and region stick
-until the next click.
 
 Users can export an interactive ROC plot by using the
 \code{export_interactive_roc} function, which returns a character string
@@ -716,7 +706,7 @@ Roc layer present.
 \subsubsection{Other estimation methods}\label{other-estimation-methods}
 
 By default \code{calculate_roc} computes the empirical ROC curve. There
-are other estimation methods out there, as I have summarized in the
+are other estimation methods out there, as summarized in the
 introduction. Any estimation method can be used, as long as the cutoff,
 the TPF and the FPF are returned. Then you can simply pass those values
 in a data frame to the \code{ggplot} function and override the default
@@ -758,28 +748,22 @@ ROC curves for time-to-event outcomes estimated as desribed in
 \citep{heagerty2000time}. Here is an example using the \pkg{survivalROC}
 package \citep{survroc} for estimation:
 
-\begin{Schunk}
-\begin{Sinput}
-R> library(survivalROC)
-R> survT <- rexp(350, 1/5)
-R> cens <- rbinom(350, 1, .1)
-R> M <- -8 * sqrt(survT) + rnorm(350, sd = survT)
-R> sroc <- lapply(c(2, 5, 10), function(t){ 
-+   stroc <- survivalROC(Stime = survT, status = cens, marker = M, 
-+                        predict.time = t, method = "NNE", 
-+                        span = .25 * 350^(-.2))
-+   data.frame(TPF = stroc[["TP"]], FPF = stroc[["FP"]], 
-+              c = stroc[["cut.values"]], 
-+              time = rep(stroc[["predict.time"]], 
-+                         length(stroc[["FP"]])))
-+   })
-R> 
-R> sroclong <- do.call(rbind, sroc)
-R> 
-R> survplot <- ggplot(sroclong, aes(x = FPF, y = TPF, label = c, color = time)) + 
-+   geom_roc(labels = FALSE, stat = "identity")
-\end{Sinput}
-\end{Schunk}
+\textbackslash{}begin\{Schunk\} \textbackslash{}begin\{Sinput\}
+R\textgreater{} library(survivalROC) R\textgreater{} survT \textless{}-
+rexp(350, 1/5) R\textgreater{} cens \textless{}- rbinom(350, 1, .1)
+R\textgreater{} M \textless{}- -8 * sqrt(survT) + rnorm(350, sd = survT)
+R\textgreater{} sroc \textless{}- lapply(c(2, 5, 10), function(t)\{ +
+stroc \textless{}- survivalROC(Stime = survT, status = cens, marker = M,
++ predict.time = t, method = ``NNE'', + span = .25 * 350\^{}(-.2)) +
+data.frame(TPF = stroc{[}{[}``TP''{]}{]}, FPF = stroc{[}{[}``FP''{]}{]},
++ c = stroc{[}{[}``cut.values''{]}{]}, + time =
+rep(stroc{[}{[}``predict.time''{]}{]}, +
+length(stroc{[}{[}``FP''{]}{]}))) + \}) R\textgreater{} R\textgreater{}
+sroclong \textless{}- do.call(rbind, sroc) R\textgreater{}
+R\textgreater{} survplot \textless{}- ggplot(sroclong, aes(x = FPF, y =
+TPF, label = c, color = time)) + + geom\_roc(labels = FALSE, stat =
+``identity'') \textbackslash{}end\{Sinput\}
+\textbackslash{}end\{Schunk\}
 
 \section{How it works}\label{how-it-works}
 
@@ -796,49 +780,47 @@ styling and labeling can be added with the \code{style_roc} and
 \code{ggplot} object into a scalable vector graphic (svg) object with
 the \code{gridSVG::grid.export} function. This function maps each
 element of the plot to a corresponding element of the svg markup
-language. I keep track of the names of the points and labels elements so
-that I can add interactivity using \pkg{d3.js} and
-\proglang{JavaScript}. The main interactive feature I wanted was to be
-able to display the cutoff labels at the points on the ROC curve closest
-to the mouse cursor.
+language. Interactivity is then added using \pkg{d3.js} and
+\proglang{JavaScript} to manipulate those svg elements in response to
+users' input. The main interactive feature is to display the cutoff
+labels at the points on the ROC curve closest to the mouse cursor.
 
-There are many ways to solve this with \pkg{d3.js}, but I decided to use
-Voronoi polygons to map the cursor location to the nearest point on the
-ROC curve. The idea is that for the set of cutoff points along the ROC
-curve, the \code{d3.geom.voronoi} function chain computes a set of
-polygons overlaying the plotting region such that the area of each
-polygon contains the region of the plot closest to it's corresponding
-cutoff point. Hover events are bound to the polygons so that when the
-mouse cursor moves around the plotting region, the closest point on the
-ROC curve is made visible. Similarly, click events are bound to the
-polygons so that the appropriate confidence region is made visible upon
-clicking. The svg code and all necessary \proglang{JavaScript} code is
-returned in the character string provided by
-\code{export_interactive_roc}.
+There are many ways to solve this with \pkg{d3.js}, but Voronoi polygons
+are a convenient and efficient way to map the cursor location to
+approximately the nearest point on the ROC curve. For the set of cutoff
+points along the ROC curve, the \code{d3.geom.voronoi} function chain
+computes a set of polygons overlaying the plotting region such that the
+area of each polygon contains the region of the plot closest to it's
+corresponding cutoff point. Hover events are bound to the polygons so
+that when the mouse cursor moves around the plotting region, the closest
+point on the ROC curve is made visible. Similarly, click events are
+bound to the polygons so that the appropriate confidence region is made
+visible upon clicking. The svg code and all necessary
+\proglang{JavaScript} code is returned in the character string provided
+by \code{export_interactive_roc}.
 
 This approach is similar to what is done in the \pkg{gridSVG}
 \code{grid.animate} function, which uses the svg \code{<animate />}
-tags. However, the available features were not sufficient for my needs,
-which is why I used \pkg{d3.js}. There are several other \proglang{R}
-packages that aim to create interactive figures. The authors of
-\pkg{animint} \citep{animint} created an extensive \proglang{JavaScript}
-library that creates plots in a similar way as \pkg{ggplot2}. A set of
-interactive features can be added to plots using \pkg{d3.js}.
-\pkg{ggvis} \citep{ggvis}, \pkg{rCharts} \citep{rcharts}, and the more
-recently released \pkg{htmlwidgets} \citep{htmlwidgets} all leverage
-existing charting libraries written in \proglang{JavaScript}.
-\pkg{qtlcharts} \citep{qtlcharts} uses a set of custom
-\proglang{JavaScript} and \pkg{d3.js} functions to visualize data from
-genetic experiments. Their general approach is to manipulate the data
-and create options in \proglang{R}, and then let the charting libraries
-or functions handle the rendering and interactivity. \pkg{plotROC} lets
-\proglang{R} do the rendering, allowing the figures to be consistent
-across print and web-based media, and retaining the distinctive
-\proglang{R} style. This also allows users to manipulate the figures
-directly in \proglang{R} to suit their needs, using tools that are more
-accessible and familiar to most \proglang{R} users. Then, the
-\proglang{JavaScript} adds a layer of interactivity to the rendered
-figures.
+tags. However, \pkg{d3.js} provides a much richer set of features. There
+are several other \proglang{R} packages that aim to create interactive
+figures. The authors of \pkg{animint} \citep{animint} created an
+extensive \proglang{JavaScript} library that creates plots in a similar
+way as \pkg{ggplot2}. A set of interactive features can be added to
+plots using \pkg{d3.js}. \pkg{ggvis} \citep{ggvis}, \pkg{rCharts}
+\citep{rcharts}, and the more recently released \pkg{htmlwidgets}
+\citep{htmlwidgets} all leverage existing charting libraries written in
+\proglang{JavaScript}. \pkg{qtlcharts} \citep{qtlcharts} uses a set of
+custom \proglang{JavaScript} and \pkg{d3.js} functions to visualize data
+from genetic experiments. Their general approach is to manipulate the
+data and record plotting options in \proglang{R}, and then pass those
+objects to the charting libraries or functions that handle the rendering
+and interactivity. \pkg{plotROC} lets \proglang{R} do the rendering,
+allowing the figures to be consistent across print and web-based media,
+and retaining the distinctive \proglang{R} style. This also allows users
+to manipulate the figures directly in \proglang{R} to suit their needs,
+using tools that are more accessible and familiar to most \proglang{R}
+users. Then, the \proglang{JavaScript} adds a layer of interactivity to
+the rendered figures.
 
 \section{Discussion}\label{discussion}
 
@@ -867,9 +849,9 @@ Compiling the pdf output also requires \pkg{pandoc} version 1.13.1 and
 R> sessionInfo()
 \end{Sinput}
 \begin{Soutput}
-R version 3.2.2 (2015-08-14)
+R version 3.2.4 (2016-03-10)
 Platform: x86_64-apple-darwin13.4.0 (64-bit)
-Running under: OS X 10.10.5 (Yosemite)
+Running under: OS X 10.11.4 (El Capitan)
 
 locale:
 [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
@@ -878,15 +860,16 @@ attached base packages:
 [1] methods   stats     graphics  grDevices utils     datasets  base     
 
 other attached packages:
-[1] survivalROC_1.0.3  tikzDevice_0.8.1   plotROC_2.0.0     
-[4] ggplot2_1.0.1.9003 xtable_1.7-4       stringr_1.0.0     
-[7] knitr_1.11        
+[1] survivalROC_1.0.3 plotROC_2.0.1     ggplot2_2.1.0     xtable_1.8-2     
+[5] stringr_1.0.0     knitr_1.13       
 
 loaded via a namespace (and not attached):
- [1] Rcpp_0.12.1      digest_0.6.8     grid_3.2.2       plyr_1.8.3      
- [5] gtable_0.1.2     formatR_1.2.1    magrittr_1.5     evaluate_0.8    
- [9] scales_0.3.0     highr_0.5.1      stringi_0.5-5    labeling_0.3    
-[13] tools_3.2.2      munsell_0.4.2    colorspace_1.2-6 filehash_2.3    
+ [1] Rcpp_0.12.5       digest_0.6.9      grid_3.2.4       
+ [4] plyr_1.8.3        gtable_0.2.0      formatR_1.4      
+ [7] magrittr_1.5      evaluate_0.9      scales_0.4.0     
+[10] highr_0.6         stringi_1.0-1     tikzDevice_0.10-1
+[13] labeling_0.3      tools_3.2.4       munsell_0.4.3    
+[16] colorspace_1.2-6  filehash_2.3     
 \end{Soutput}
 \end{Schunk}
 

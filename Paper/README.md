@@ -1,4 +1,4 @@
-Source Files for "plotROC: A Better Tool for Plotting ROC Curves"
+Source Files for "plotROC: A Tool for Plotting ROC Curves"
 --------------------
 Author: Michael C Sachs
 ====================
@@ -7,10 +7,10 @@ Author: Michael C Sachs
 - make
 - R (3.1.2) and R packages
 	+ knitr (1.8)
-	+ plotROC (2.0.-) [available at http://github.com/sachsmc/plotROC]
+	+ plotROC (2.0.-) [available at CRAN or http://github.com/sachsmc/plotROC]
 	+ stringr (0.6.2)
 	+ xtable (1.7-4)
-	+ ggplot2 (1.0.1) [available at http://github.com/hadley/ggplot2]
+	+ ggplot2 (>= 2.0.1) [available at CRAN or http://github.com/hadley/ggplot2]
 	+ survivalROC (1.0.3)
 	+ ROCR (1.0-5)
 - pandoc (1.13.1)
